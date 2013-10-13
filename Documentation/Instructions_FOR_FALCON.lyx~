@@ -1,0 +1,2155 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+\noindent
+FALCON - Instructions
+\end_layout
+
+\begin_layout Author
+\noindent
+Stephen J.
+ Beckett*, Hywel T.
+ P.
+ Williams
+\end_layout
+
+\begin_layout Address
+\noindent
+College of Life and Environmental Sciences, University of Exeter, Exeter,
+ UK
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename falcon.png
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+*author for correspondence: S.J.Beckett@exeter.ac.uk
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $\;$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\noindent
+Introduction
+\end_layout
+
+\begin_layout Standard
+\noindent
+FALCON is currently a collection of codes intended to enable the comparison
+ of different nestedness measurements and null models using an adaptive
+ ensemble method.
+ You can read more about the methodology and philosophy behind FALCON in
+ 
+\family typewriter
+\series bold
+What_FALCON_doeS.pdf
+\family default
+\series default
+ .
+ It is currently coded in MATLAB, but the codes are currently being rewritten
+ for use in R.
+ This document details instructions for how to download and use the FALCON
+ codes.
+ To aid reading this document 
+\family typewriter
+\color green
+folder locations are typed in this shade of colour
+\family default
+\color inherit
+, 
+\family typewriter
+\color red
+variables are typed in this shade of colour
+\family default
+\color inherit
+ and 
+\family typewriter
+\color blue
+file names are typed in this shade of colour
+\family default
+\color inherit
+.
+\end_layout
+
+\begin_layout Section
+\noindent
+Downloading
+\end_layout
+
+\begin_layout Standard
+\noindent
+If you have not already downloaded FALCON, you can find the main project
+ at 
+\bar under
+\color blue
+
+\begin_inset CommandInset href
+LatexCommand href
+target "https://github.com/sjbeckett/FALCON"
+
+\end_inset
+
+
+\bar default
+\color inherit
+ .
+ Don't worry if you are unfamiliar with GitHub, it is an online repository
+ that is widely used for sharing and collaborating on coding based projects.
+ You can download FALCON by clicking on the 'Download ZIP' button (which
+ is in the bottom right at time of writing).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Once the ZIP file has downloaded, you can move it to somewhere where you
+ wish to access if from and then you will need to extract the files from
+ their compressed format.
+ You should probably be able to find this in the options list after right
+ clicking the folder.
+\end_layout
+
+\begin_layout Section
+\noindent
+MATLAB
+\end_layout
+
+\begin_layout Standard
+\noindent
+You will require a copy of MATLAB to run the MATLAB version of FALCON.
+ If you do not have one installed it may be possible to download a trial
+ edition.
+ If you cannot aquire a version of MATLAB you could try Octave, which is
+ an open source program that is very similar though some code may need changing.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+1.
+ Open MATLAB
+\end_layout
+
+\begin_layout Standard
+\noindent
+2.
+ Navigate to where you have stored the FALCON folder.
+\end_layout
+
+\begin_layout Standard
+\noindent
+3.
+ Navigate through to 
+\family typewriter
+\color green
+FALCON/MATLAB/
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+The folder 
+\family typewriter
+\color green
+FALCON/MATLAB/
+\family default
+\color inherit
+ contains file seperated functions organised into what their function is
+ within the nesteness finding algorithm.
+ It contains a simple code that should allow for very simple computation
+ of nestedness metrics through user input via questions at the command line.
+ We will cover this function in the Beginners 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sub:Beginners"
+
+\end_inset
+
+.
+ If you want something more malleable then skip this section and move straight
+ into the Advanced 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sub:Advanced"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\noindent
+Beginners
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Beginners"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Type
+\begin_inset Formula $\;\;$
+\end_inset
+
+
+\begin_inset Formula $\;$
+\end_inset
+
+ 
+\family typewriter
+QuestionFile
+\family default
+
+\begin_inset Formula $\;\;$
+\end_inset
+
+
+\begin_inset Formula $\;$
+\end_inset
+
+ into the command window and hit enter.
+ This will cause the script in 
+\family typewriter
+\color blue
+QuestionFile.m
+\family default
+\color inherit
+ to run.
+ This script will ask you questions about which matrix you wish to assess
+ the nestedness of as well as questions related to how you want to measure
+ it.
+ So you understand what this program asks of you it is recommended to generate
+ a random matrix the first time you try it by typing 
+\begin_inset Formula $\;\;$
+\end_inset
+
+
+\begin_inset Formula $\;$
+\end_inset
+
+
+\family typewriter
+generate
+\family default
+
+\begin_inset Formula $\;\;$
+\end_inset
+
+
+\begin_inset Formula $\;$
+\end_inset
+
+ and pressing enter as the answer to the first question as shown below.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+>> QuestionFile
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+- What is the variable name of the matrix you wish to test? If a variable
+ is not yet assigned type "exit" and do this before continuing, or type
+ "generate" to generate random matrix to test the code:
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+generate
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Running 
+\family typewriter
+\color blue
+QuestionFile.m
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+then answer the other questions by typing in the relevant answers as numbers
+ or yes/no according to the displayed choices.
+ See §
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Interpreting-output"
+
+\end_inset
+
+ to learn about how to interpret the output.
+ To run the algorithm with your own matrices you will have to load/create
+ your matrices into MATLAB and assign them to a new variable.
+ To load a matrix from sheet 1 in the excel spreadsheet text.xls for example
+ and save it to a new variable called 
+\family typewriter
+\color red
+MY_MATRIX
+\family default
+\color inherit
+ you can run the code (similar is also shown in 
+\family typewriter
+\color blue
+examplescript.m
+\family default
+\color inherit
+):
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+>> MY_MATRIX = xlsread('test',1)
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Loading matrix from test.xls and assigning it to 
+\family typewriter
+\color red
+MY_MATRIX
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+then in running 
+\family typewriter
+\color blue
+QuestionFile.m
+\family default
+\color inherit
+ instead of using generate as above we need to tell MATLAB about our matrix
+ stored in 
+\family typewriter
+\color red
+MY_MATRIX
+\family default
+\color inherit
+:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+>> QuestionFile
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+- What is the variable name of the matrix you wish to test? If a variable
+ is not yet assigned type "exit" and do this before continuing, or type
+ "generate" to generate random matrix to test the code:
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+MY_MATRIX
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Running 
+\family typewriter
+\color blue
+QuestionFile.m
+\family default
+\color inherit
+ using a users matrix
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+\noindent
+Advanced
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Advanced"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Default options
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\family typewriter
+\color blue
+PERFORM_NESTED_TEST.m
+\family default
+\color inherit
+ is the main function containing FALCONS's 'brains'.
+ It takes user options as input and uses them to work out which metric,
+ which null models and which solver should be used.
+ After creating or loading the matrix (
+\family typewriter
+\color red
+MATRIX
+\family default
+\color inherit
+) you wish to assess into MATLAB you will need to define an empty variable
+ to store output in, then you can run the function as follows:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+>> store=[];
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+>> store = PERFORM_NESTED_TEST(store,MATRIX,binary,MEASURE,nulls,thresh,ensNum,p
+lotON);
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Running 
+\family typewriter
+\color blue
+PERFORM_NESTED_TEST.m
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+where 
+\family typewriter
+\color red
+store
+\family default
+\color inherit
+ is the variable being passed through the function to store the output where
+ it is used as an object.
+ 
+\family typewriter
+\color red
+MATRIX
+\family default
+\color inherit
+ is the matrix to be tested, 
+\family typewriter
+\color red
+binary
+\family default
+\color inherit
+ records whether the nested tests the user wishes to assess are binary,
+ quantitative or both:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $binary=\begin{cases}
+0 & quantitative\\
+1 & binary\\
+2 & both
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\family typewriter
+\color red
+MEASURE
+\family default
+\color inherit
+ is the string name of the measure that the user wishes to assess.
+ The string is used to call functions saved in the folder 
+\family typewriter
+\color green
+FALCON/MATLAB/MEASURES
+\family default
+\color inherit
+ .
+ If there is a measure that we have not coded but you wish to study it can
+ be saved here and then used.
+ At current the measures of nestedness that we include are:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Code
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+binary/quantitative
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NODF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NODF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+WNODF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+WNODF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Quantitative
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+WNODF-REVERSE
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+WNODF_REVERSE
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Quantitative
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Manhattan distance 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MANHATTAN_DISTANCE
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(used to calculate 
+\begin_inset Formula $\tau-temperature$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Spectral Radius
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SPECTRAL_RADIUS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Both
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Types of measures included in FALCON
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\family typewriter
+\color red
+nulls
+\family default
+\color inherit
+ is the variable that decides which null models are to be used in significance
+ testing of the input matrix.
+ It's choice is tied to whether the user wishes to test the matrix in a
+ binary or quantitative sense.
+ Many null models can be tested with one call to the 
+\family typewriter
+\color blue
+PERFORM_NESTED_TEST.m
+\family default
+\color inherit
+ function by using a vector, alternatively all possible null models can
+ be called by setting 
+\family typewriter
+\color red
+nulls
+\color black
+=[]
+\family default
+\color inherit
+.
+ Outputs are stored in seperate objects within 
+\family typewriter
+\color red
+store
+\family default
+\color inherit
+ for each of the different null models (see 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sub:Interpreting-output"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CodeID
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Equiprobable-Equiprobable (EE)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fixed-Fixed(FF)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Relatively Fixed-Relatively Fixed(RFRF)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shuffle Values
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Quantitative
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Conserve Row Totals
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-2?
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Quantitative
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Conserve Column Totals
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-3?
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Quantitative
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Types of null models included in FALCON
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Each null model is encoded with a number (positive for binary nulls and
+ negative for quantitative nulls) and new null models can be added to the
+ folder 
+\family typewriter
+\color green
+FALCON/MATLAB/NULLS
+\family default
+\color inherit
+ .
+ In order to use them you will also need to change some information in the
+ 
+\family typewriter
+\color blue
+PERFORM_NESTED_TEST.m
+\family default
+\color inherit
+ function.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+The setting of variables 
+\family typewriter
+\color red
+thresh
+\family default
+\color inherit
+ and
+\family typewriter
+ 
+\color red
+ensNum
+\family default
+\color inherit
+ tells 
+\family typewriter
+\color blue
+PERFORM_NESTED_TEST.m
+\color inherit
+ 
+\family default
+which solver (adaptive or fixed) to run and an option to go with it.
+ To run the adaptive solver 
+\family typewriter
+\color red
+ensNum
+\family default
+\color inherit
+ should be set as empty (
+\family typewriter
+\color red
+ensNum
+\color inherit
+=[]
+\family default
+), while 
+\family typewriter
+\color red
+thresh
+\family default
+\color inherit
+ represents the threshold value for the difference in normalised temperature
+ between the two sampling groups i.e.
+ the measure of the test matrix divided by the expected nestedness measure
+ calculated from the ensemble.
+ However, if 
+\family typewriter
+\color red
+ensNum
+\family default
+\color inherit
+ is not empty, the value it takes specifies the exact number of null models
+ should be used in the ensemble to test for statistical significance of
+ the nestedness found.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+The final input argument 
+\family typewriter
+\color red
+plotON
+\family default
+\color inherit
+ is used to indicate whether the user would like to view a histogram of
+ the measures computed in the null ensemble where 1 indicates that the plot
+ should be made and 0 indicates it should not.
+ Plotting arguments can be found in the 
+\family typewriter
+\color green
+FALCON/MATLAB/MISC
+\family default
+\color inherit
+ folder in 
+\family typewriter
+\color blue
+plotNullEnsemble.m
+\family default
+\color inherit
+ .
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+You should look at 
+\family typewriter
+\color blue
+examplescripts.m
+\family default
+\color inherit
+ for some examples of how to use FALCON in this way.
+\end_layout
+
+\begin_layout Subsubsection*
+Including additional functions
+\end_layout
+
+\begin_layout Standard
+You may also wish to introduce new functionality to the FALCON package,
+ for example by including additional null models or additional measures
+ of nestedness.
+ This will include writing a function and saving it to the appropriate folder,
+ where the arguments should be the same as given for the other functions
+ there, but also in the case of new null models modifying 
+\family typewriter
+\color blue
+PERFORM_NESTED_TEST.m
+\family default
+\color inherit
+ .
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+This file has information about which types of measures and which null models
+ are appropriate for each other based on whether they are binary or quantitative
+ in nature.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+If you are adding extra null models the things you need to change in 
+\family typewriter
+\color blue
+PERFORM_NESTED_TEST.m
+\family default
+\color inherit
+ are:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+- The variables 
+\family typewriter
+\color red
+BnullNumber
+\family default
+\color inherit
+ and 
+\family typewriter
+\color red
+QnullNumber
+\family default
+\color inherit
+ in the %%REFERENCES section which represent the number of available binary
+ and quantitative null models respectively.
+\end_layout
+
+\begin_layout Standard
+- Adding code to tell the function to run your null model and store it in
+ an appropriate object in the %%PERFORM TESTS section.
+\end_layout
+
+\begin_layout Subsection
+\noindent
+Interpreting output
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Interpreting-output"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Once you have run one of the above nestedness scripts you will be supplied
+ with some sort of output that will look something like this:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $\;$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\family typewriter
+ans = 
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\family typewriter
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\family typewriter
+NANcount: 0
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\family typewriter
+EnsembleNum: 10000
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\family typewriter
+pvalue: 0.2517
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\family typewriter
+Mean: 57.7676
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\family typewriter
+NormalisedTemperature: 1.0386 
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\family typewriter
+StandardDeviation: 2.1469 
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\family typewriter
+sampleZscore: 1.0398 
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\family typewriter
+Measure: 60
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+What does it mean? See 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "tab:Description-of-FALCON"
+
+\end_inset
+
+ for a description of the output variables.
+ It should be noted that the 
+\family typewriter
+\color red
+NormalisedTemperature
+\family default
+\color inherit
+ calculated for the Manhattan distance is the 
+\begin_inset Formula $\tau-temperature$
+\end_inset
+
+, where a 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\tau-temperature$
+\end_inset
+
+ greater than 1 indicates it is less nested than expected in comparison
+ to the null model, whilst a 
+\begin_inset Formula $\tau-temperature$
+\end_inset
+
+ less than 1 indicates it is more nested than expected according to the
+ null model.
+ This is due to more nested matrices having a lower Manhattan distance due
+ to the matrix more likely to appear upper triangular - the shape (for a
+ given number of elements) that will minimize Manhattan distance.
+ This method of measuring nestedness therefore differs from the other measures
+ considered here as the amount of nestedness decreases with increasing score.
+ Thus the above definitions for 
+\family typewriter
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color red
+NormalisedTemperature
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ defined for 
+\begin_inset Formula $\tau-temperature$
+\end_inset
+
+ are reversed when looking at NODF or spectral radius.
+ However, these differences in the way these measures are defined are accounted
+ for when considering the p-value.
+ 
+\family typewriter
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color red
+pvalue
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ always represents the probability of attaining a more nested matrix than
+ the one under consideration.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="12" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Description
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NANcount
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Number of null models in ensemble that returned
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+nestedness score with not a number.
+ Want 0 of these!
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+EnsembleNum
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Number of null models used in ensemble for significance testing
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pvalue
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+The p-value found by significance testing (proportion of null models 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+returning a higher nestedness score i.e the probability of attaining a
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+higher nestedness score than Measure)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mean
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+The mean average nestedness score returned by the null model ensemble
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NormalisedTemperature
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+The normalised nestedness temperature ( = Measure/Mean)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+StandardDeviation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+The standard deviation of the test matrix from the ensemble
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+sampleZscore
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+The sample Z-score of the matrix against the ensemble
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Measure
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+The nestedness score of the matrix itself against chosen measure
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Description of FALCON output
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Description-of-FALCON"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+If you are running the 
+\family typewriter
+\color blue
+PERFORM_NESTED_TEST.m
+\family default
+\color inherit
+ function rather than 
+\family typewriter
+\color blue
+QuestionFile.m
+\family default
+\color inherit
+ it is important to know that you can run tests for multiple null models
+ with one command, thus the above information in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "tab:Description-of-FALCON"
+
+\end_inset
+
+ is computed for each of the null models you decide to compute.
+ Each binary null model set of results is stored in the object 
+\family typewriter
+\color red
+store.Bin_t#
+\family default
+\color inherit
+ and every quantitative null model set of results is stored in the object
+ 
+\family typewriter
+\color red
+store.Qua_t#
+\family default
+\color inherit
+, where the # refers to the null models identifying number set in 
+\family typewriter
+\color blue
+PERFORM_NESTED_TEST.m
+\family default
+\color inherit
+ (the negative numbers used for quantitative nulls are shown as positives
+ here).
+ In addition the input matrix is saved as 
+\family typewriter
+\color red
+store.Matrix
+\family default
+\color inherit
+ and the ordering of rows and columns used to compute nestedness are saved
+ as 
+\family typewriter
+\color red
+store.index_rows
+\family default
+\color inherit
+ and 
+\family typewriter
+\color red
+store.index_cols
+\family default
+\color inherit
+ respectively.
+ This shows rows and columns sorted into their most likely nested configuration
+ by sorting them in terms of row and column degree respectively and removing
+ rows and columns composed entirely of zero elements.
+ This sorted matrix can be viewed by issuing the following command:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+>>store.Matrix(store.index_rows,store.index_cols)
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Displaying nested configuration of input matrix
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\noindent
+R
+\end_layout
+
+\begin_layout Standard
+\noindent
+Coding up the algorithms in R is a current project, once this is done documentat
+ion will be addressed.
+\end_layout
+
+\end_body
+\end_document
