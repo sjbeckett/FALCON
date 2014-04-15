@@ -39,5 +39,5 @@ Download
 Contact
 --------
 
-This package is authored by Stephen Beckett ([@BeckettStephen](https://twitter.com/BeckettStephen)) and Hywel Williams([@HywelTPWilliams](https://twitter.com/HywelTPWilliams)) at the University of Exeter. If you have any questions please contact us!
+This package is authored by Stephen Beckett ([@BeckettStephen](https://twitter.com/BeckettStephen)), Chris Boulton ([@caboulton](https://twitter.com/caboulton)) and Hywel Williams([@HywelTPWilliams](https://twitter.com/HywelTPWilliams)) at the University of Exeter. If you have any questions please contact us!
 
