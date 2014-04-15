@@ -1,0 +1,474 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 5page%
+\topmargin 5pheight%
+\rightmargin 5page%
+\bottommargin 5pheight%
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+A quick start guide to FALCON
+\end_layout
+
+\begin_layout Author
+\noindent
+Stephen J.
+ Beckett*, Chris A.
+ Boulton, Hywel T.
+ P.
+ Williams
+\end_layout
+
+\begin_layout Address
+\noindent
+\align center
+College of Life and Environmental Sciences, University of Exeter, Exeter,
+ UK
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename falcon.png
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+*author for correspondence: S.J.Beckett@exeter.ac.uk
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Introduction
+\end_layout
+
+\begin_layout Standard
+FALCON is a free software package for calculating and comparing nestedness
+ in bipartite networks.
+ FALCON is available to download from 
+\bar under
+\color blue
+
+\begin_inset CommandInset href
+LatexCommand href
+target "https://github.com/sjbeckett/FALCON"
+
+\end_inset
+
+
+\bar default
+\color inherit
+.
+ This document is to be used as a quick start guide or as a reference page
+ to using FALCON for the calculation of nestedness.
+ On the following page is a quick set of instructions to get started with
+ FALCON for those already familiar with MATLAB/Octave or R programming languages
+ and nestedness analysis.
+ It may also serve well as a reference guide for those who have read the
+ more detailed instruction manual.
+ Additional documents that users may be interested in reading are:
+\end_layout
+
+\begin_layout Itemize
+\paragraph_spacing double
+\noindent
+
+\series bold
+FALCON_Manuscript.pdf
+\series default
+ -- a document that describes the concept of nestedness analysis and details
+ the methodology used by FALCON
+\end_layout
+
+\begin_layout Itemize
+\paragraph_spacing double
+\noindent
+
+\series bold
+FALCON_InstructionGuide.pdf 
+\series default
+-- a more in depth practical guide to using FALCON
+\end_layout
+
+\begin_layout Itemize
+\paragraph_spacing double
+\noindent
+
+\series bold
+FALCON_Development.pdf
+\series default
+ -- some of the coding and development issues faced during the development
+ of FALCON
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Interactive Mode
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+1.
+ Navigate to FALCON/MATLAB (if using MATLAB or Octave) or FALCON/R (if using
+ R)
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+2.
+ Run interactive mode, in MATLAB/Octave just type
+\begin_inset Formula $\qquad$
+\end_inset
+
+
+\family typewriter
+InteractiveMode
+\family default
+
+\begin_inset Formula $\qquad$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+whilst in R type:
+\begin_inset Formula $\qquad$
+\end_inset
+
+
+\family typewriter
+source(`InteractiveMode.R')
+\family default
+
+\begin_inset Formula $\qquad$
+\end_inset
+
+ to begin.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+3.
+ Follow the on screen instructions!
+\end_layout
+
+\begin_layout Section*
+Command Line Mode
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+1.
+ Navigate to FALCON/MATLAB (if using MATLAB or Octave) or FALCON/R (if using
+ R)
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+2.
+ If using R: 
+\begin_inset Formula $\qquad$
+\end_inset
+
+
+\family typewriter
+source(`PERFORM_NESTED_TEST.R')
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+3.
+ Run FALCON using the command : 
+\begin_inset Formula $\qquad$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing other 2.5
+\noindent
+
+\family typewriter
+PERFORM_NESTED_TEST(MATRIX, binary, MEASURE, nulls, ensNum, sortVar, plotON)
+\family default
+
+\begin_inset Formula $\qquad$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing other 2
+\noindent
+where:
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+
+\emph on
+\bar under
+MATRIX
+\emph default
+\bar default
+ -- the matrix array you wish to test for nestedness
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+binary -- whether the analysis you wish to perform is binary (1), quantitative
+ (0) or both (2)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+
+\emph on
+\bar under
+MEASURE
+\emph default
+\bar default
+ -- is a list of the nestedness measures to be used, which call the files
+ in the MEASURES folder.
+ An example list can be written in MATLAB as:
+\begin_inset Formula $\qquad$
+\end_inset
+
+ 
+\family typewriter
+{`NODF',`DISCREPANCY',`SPECTRAL_RADIUS'}
+\family default
+
+\begin_inset Formula $\qquad$
+\end_inset
+
+ (note the braces, {}, are important here!).
+ In R this would be: 
+\begin_inset Formula $\qquad$
+\end_inset
+
+ 
+\family typewriter
+c(`NODF',`DISCREPANCY',`SPECTRAL_RADIUS')
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+
+\emph on
+\bar under
+nulls
+\emph default
+\bar default
+ -- the list of null models to be used.
+ The full set can be called using the empty list; in MATLAB:
+\begin_inset Formula $\qquad$
+\end_inset
+
+
+\family typewriter
+[]
+\family default
+
+\begin_inset Formula $\qquad$
+\end_inset
+
+ and in R: 
+\begin_inset Formula $\qquad$
+\end_inset
+
+
+\family typewriter
+c()
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+
+\emph on
+\bar under
+ensNum
+\emph default
+\bar default
+ -- the type of ensemble to use.
+ If set to the empty list, the adaptive solver will be called.
+ Alternatively this variable can be set the number of null matrices you
+ wish to use in your ensemble
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+
+\emph on
+\bar under
+sortVar
+\emph default
+\bar default
+ -- whether matrices should be preliminary ordered (1) to maximise nestedness
+ found in the input and null matrices or not (0)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+
+\emph on
+\bar under
+plotON
+\emph default
+\bar default
+ -- whether to return plots of the measured distributions for each null
+ model (1) or not (0)
+\end_layout
+
+\end_body
+\end_document

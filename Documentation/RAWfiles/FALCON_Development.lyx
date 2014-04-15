@@ -1,0 +1,353 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Coding and development issues in FALCON
+\end_layout
+
+\begin_layout Author
+Stephen J.
+ Beckett*, Chris A.
+ Boulton, Hywel T.
+ P.
+ Williams
+\end_layout
+
+\begin_layout Address
+\align center
+College of Life and Environmental Sciences, University of Exeter, Exeter,
+ UK
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename falcon.png
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+*author for correspondence: S.J.Beckett@exeter.ac.uk
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset CommandInset line
+LatexCommand rule
+offset "0page%"
+width "100col%"
+height "1pt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the creation of the FALCON statistical framework, we came across many
+ decisions that needed to be made in the process to find the nestedness
+ of a matrix and its significance.
+ Some of the key issues we came across are outlined below:
+\end_layout
+
+\begin_layout Itemize
+Some users of nestedness measures elect to leave in some nodes from their
+ data that do not connect to any other nodes (e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "flores2011statistical"
+
+\end_inset
+
+), whilst this may make sense from a specific data perspective these nodes
+ do not actually form part of the interaction network and we believe they
+ should be removed from the analysis - else why not add further spurious
+ nodes?
+\end_layout
+
+\begin_layout Itemize
+Sometimes nestedness analysis, especially in a biogeographic setting is
+ used to determine the effects of particular ecological gradients on the
+ nestedness pattern in the matrix - and thus the input data that is used
+ is sorted along some predetermined ecological gradients.
+ However, in other settings, these gradients typically are not known and
+ instead the key question instead is related to how nested the interaction
+ network actually is - by sorting rows and columns for maximum nestedness.
+ This latter definition is more broad and applicable to the statistical
+ structure of nestedness to be found in matrices than the former, which
+ is not computable for several nestedness measures.
+ However, we allow both kinds of analysis to be performed by FALCON.
+\end_layout
+
+\begin_layout Itemize
+The FF null model offers several challenges - the foremost of which is to
+ ensure that null matrices are fairly generated from the distribution of
+ null matrices that exist.
+ 
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "miklos2004randomization"
+
+\end_inset
+
+ show that using a trial swap methodology rather than just the swaps that
+ exists gives a better distribution, but requires a large number of trial
+ swaps.
+ They also show that generating these types of null matrices is a Markov
+ chain problem and suggest two other methodologies for generating these
+ matrices that may be faster than the trial swap algorithm.
+ However these methods complete in stochastic time and we found that whilst
+ they were faster than trial swaps on random matrices with a near homogeneous
+ degree distribution, they were exponentially slower at generating null
+ ensembles for matrices that had a heterogeneous degree distribution (results
+ not shown) - most pertinently this includes those matrices which are nested.
+ For these reasons we decided to use a trial swap method using 30,000 trial
+ swaps (or rows multiplied by columns if this is larger) as a spinup to
+ find the first null matrix and subsequent null matrices are found after
+ 5,000 additional trial swaps using advice given in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gotelli2011over"
+
+\end_inset
+
+.
+ This is a much more computationally demanding null model than the others
+ used in FALCON.
+ There may be a clever way to choose between different algorithms for different
+ matrices to improve performance for this type of null model; or new or
+ improved algorithms may be of interest to researchers interested in this
+ null model.
+ Some matrices have no available swaps - in these cases performing the trial
+ swap algorithm is a hindrance, as such we check that at least one swap
+ is possible before beginning the trial swap algorithm.
+ If no swaps are available the same measure score as for the initial matrix
+ is assigned to all members of the ensemble such that a p-value of p=1 will
+ be assigned.
+\end_layout
+
+\begin_layout Itemize
+In order to address the FF null model in this way we changed the code system
+ such that instead of generation of null matrices and measurement operations
+ being performed independently of one another in statistical ensembles as
+ in a previous version of FALCON
+\begin_inset CommandInset citation
+LatexCommand citep
+key "beckett2013coevolutionary"
+
+\end_inset
+
+, that measurements are taken from within the null model ensemble generation
+ functions.
+\end_layout
+
+\begin_layout Itemize
+Although the NTC
+\begin_inset CommandInset citation
+LatexCommand citep
+key "atmar1993measure"
+
+\end_inset
+
+ was the first way to quantify nestedness using both row and column information
+ and received much popularity due to the software that accompanied it -
+ the actual methodology given for its computation was lacking as the source
+ code was hidden away in the application; a black box.
+ This lead to several subsequent publications which attempted to lay down
+ a more concise methodology 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "guimaraes2006improvingAninhado,rodriguez2006new,ulrich2007null,oksanen2013vegan2"
+
+\end_inset
+
+.
+ These procedures also had accompanying software, but similar to the nestedness
+ temperature calculator the actual source code was also hidden away in some
+ of these applications.
+ As such it is hard not to treat these as statistical black boxes.
+ 
+\family typewriter
+nestedtemp 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "oksanen2013vegan2"
+
+\end_inset
+
+
+\family default
+ was one of just two open source methodologies that we were able to find
+ for calculating nestedness in a way similar to the original NTC, though
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ulrich2007null"
+
+\end_inset
+
+ uses a pair of linear isoclines, rather than the curve in the original
+ method.
+ We therefore decided to use 
+\family typewriter
+nestedtemp
+\family default
+ as the basis of the NTC used in FALCON, especially as its use is also recommend
+ed by the R bipartite package 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "DormannBipartitePackage"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+As highlighted in the description the choice for an adaptive ensemble may
+ be non-trivial.
+ Previously our methodology used the convergence of the average nestedness
+ score in two sampling groups as an indicator for whether the sampling groups
+ were representative of the population.
+ Here instead we have chosen to perform a Mann-Whitney U test between the
+ two sampling groups to question whether they appear to have come from the
+ same discrete distribution (at the 
+\color black
+10%
+\color inherit
+ significance level) as an indicator of their representation of the population.
+ We believe this test is better as the underlying sampling space of nestedness
+ measures is discrete and is not sensitive to just one descriptor of a distribut
+ion.
+ There may be other and better ways to tell when a population is representativel
+y sampled, but here we merely sow the seeds of this idea.
+\end_layout
+
+\begin_layout Itemize
+Another new feature to this version of FALCON is that multiple nestedness
+ measures can be taken within the same null ensemble using the same null
+ matrices.
+ Thus for the adaptive solver's condition to be satisfied - the two sampling
+ groups must satisfy the Mann-Whitney U test for each of the specified nestednes
+s measures.
+ This could prove problematic if there was an exceptionally large number
+ of measures (such that the condition might always fail from one measure
+ by chance alone) or a nestedness measure was chosen that was unable to
+ satisfy this condition (i.e.
+ continuous or stochastic) and is something for potential FALCON developers
+ to be aware of.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "FALCON"
+options "biochem"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

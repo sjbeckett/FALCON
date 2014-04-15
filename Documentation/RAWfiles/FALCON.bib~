@@ -1,0 +1,546 @@
+
+@article{FALCON,
+ title={FALCON: nestedness statistics for bipartite networks},
+ author={Beckett, S.J. and Boulton, C.A. and Williams, H.T.P},
+ journal={figshare},
+ doi={http://dx.doi.org/10.6084/m9.figshare.999117},
+ year={2014},
+ publisher={figshare},
+ howpublished={http://dx.doi.org/10.6084/m9.figshare.999117}
+}
+ 
+Retrieved 12:52, Apr 15, 2014 (GMT)
+http://dx.doi.org/10.6084/m9.figshare.999117 - See more at: http://figshare.com/preview/_preview/999117#reserve_citation
+
+
+@article{corso2012nestedness,
+  title={Nestedness and $\tau$-temperature in ecological networks},
+  author={Corso, G. and Britton, N. F.},
+  journal={Ecological Complexity},
+  doi={10.1016/j.ecocom.2012.05.003},
+  volume={11},
+  pages={137--143},
+  year={2012},
+  publisher={Elsevier}
+}
+
+
+@article{almeida2008consistent,
+  title={A consistent metric for nestedness analysis in ecological systems: reconciling concept and measurement},
+  author={Almeida-Neto, M. and Guimaraes, P. and Guimar{\~a}es, P. R. and Loyola, R. D. and Ulrich, W.},
+  journal={Oikos},
+  volume={117},
+  doi={10.1111/j.0030-1299.2008.16644.x},
+  number={8},
+  pages={1227--1239},
+  year={2008},
+  publisher={Wiley Online Library}
+}
+
+
+@article{ulrich2012meanings,
+  title={On the meanings of nestedness: back to the basics},
+  author={Ulrich, W. and Almeida-Neto, M.},
+  journal={Ecography},
+  doi={10.1111/j.1600-0587.2012.07671.x},
+  volume={35},
+  number={10},
+  pages={865--871},
+  year={2012},
+  publisher={Wiley Online Library}
+}
+
+
+@article{staniczenko2013ghost,
+  title={The ghost of nestedness in ecological networks},
+  author={Staniczenko, P. P. A. and Kopp, J. C. and Allesina, S.},
+  journal={Nature Communications},
+  doi={10.1038/ncomms2422},
+  volume={4},
+  pages={1391},
+  year={2013},
+  publisher={Nature Publishing Group}
+}
+
+
+@article{fortuna2010nestedness,
+  title={Nestedness versus modularity in ecological networks: two sides of the same coin?},
+  author={Fortuna, M. A. and Stouffer, D. B. and Olesen, J. M. and Jordano, P. and Mouillot, D. and Krasnov, B. R. and Poulin, R. and Bascompte, J.},
+  journal={Journal of Animal Ecology},
+  volume={79},
+  doi={10.1111/j.1365-2656.2010.01688.x},
+  number={4},
+  pages={811--817},
+  year={2010},
+  publisher={Wiley Online Library}
+}
+
+
+
+@article{atmar1993measure,
+  title={The measure of order and disorder in the distribution of species in fragmented habitat},
+  author={Atmar, W. and Patterson, B. D.},
+  journal={Oecologia},
+  volume={96},
+  doi={10.1007/BF00317508},
+  number={3},
+  pages={373--382},
+  year={1993},
+  publisher={Springer}
+}
+
+
+@article{joppa2010nestedness,
+  title={On nestedness in ecological networks},
+  author={Joppa, L. N. and Montoya, J. M. and Sol{\'e}, R. and Sanderson, J. and Pimm, S. L.},
+  journal={Evolutionary Ecology Research},
+  volume={12},
+  ISSN={1522-0613},
+  pages={35--46},
+  year={2010}
+}
+
+@article{guimaraes2006improvingAninhado,
+  title={Improving the analyses of nestedness for large sets of matrices},
+  author={Guimar{\~a}es, P. R. and Guimar{\~a}es, P.},
+  journal={Environmental Modelling \& Software},
+  volume={21},
+  doi={10.1016/j.envsoft.2006.04.002},
+  number={10},
+  pages={1512--1513},
+  year={2006},
+  publisher={Elsevier}
+}
+
+
+
+@article{podani2012comparative,
+  title={A comparative evaluation of pairwise nestedness measures},
+  author={Podani, J. and Schmera, D.},
+  doi={10.1111/j.1600-0587.2011.07319.x},
+  journal={Ecography},
+  number={10},
+  volume={35},
+  pages={889-900},
+  year={2012},
+  publisher={Wiley Online Library}
+}
+
+
+@article{miklos2004randomization,
+  title={Randomization of presence-absence matrices: comments and new algorithms},
+  author={Mikl{\'o}s, I. and Podani, J.},
+  journal={Ecology},
+  volume={85},
+  doi={10.1890/03-0101},
+  number={1},
+  pages={86--92},
+  year={2004},
+  publisher={Eco Soc America}
+}
+
+
+@article{rodriguez2006new,
+  title={A new algorithm to calculate the nestedness temperature of presence--absence matrices},
+  author={Rodr{\'\i}guez-Giron{\'e}s, M. A. and Santamar{\'\i}a, L.},
+  journal={Journal of Biogeography},
+  volume={33},
+  doi={10.1111/j.1365-2699.2006.01444.x},
+  number={5},
+  pages={924--935},
+  year={2006},
+  publisher={Wiley Online Library}
+}
+
+
+@article{almeida2011straightforward,
+  title={A straightforward computational approach for measuring nestedness using quantitative matrices},
+  author={Almeida-Neto, M. and Ulrich, W.},
+  journal={Environmental Modelling \& Software},
+  volume={26},
+  doi={10.1016/j.envsoft.2010.08.003},
+  number={2},
+  pages={173--178},
+  year={2011},
+  publisher={Elsevier}
+}
+
+@article{McQuaid201353,
+title = "Host-parasite nestedness: A result of co-evolving trait-values ",
+journal = "Ecological Complexity ",
+volume = "13",
+pages = "53 - 59",
+year = "2013",
+note = "",
+issn = "1476-945X",
+doi = "http://dx.doi.org/10.1016/j.ecocom.2013.01.001",
+url = "http://www.sciencedirect.com/science/article/pii/S1476945X13000044",
+author = "C. F. McQuaid and N. F. Britton",
+keywords = "Co-evolution",
+keywords = "Host–parasite",
+keywords = "Nestedness",
+keywords = "Trade-off "
+}
+
+
+@article{Flores2013multiscaleGeographicPhage,
+title = {Multi-scale structure and geographic drivers of cross-infection within marine bacteria and phages},
+author = {Flores, C. O. and Valverde, S. and Weitz, J. S.},
+journal = {ISME Journal},
+issn = {1751-7370},
+doi={10.1038/ismej.2012.135},
+year = {2013},
+volume={7},
+pages={520--532}
+}
+
+
+
+@article{bascompte2003nested,
+  title={The nested assembly of plant--animal mutualistic networks},
+  author={Bascompte, J. and Jordano, P. and Meli{\'a}n, C. J. and Olesen, J. M.},
+  journal={Proceedings of the National Academy of Sciences},
+  volume={100},
+  doi={10.1073/pnas.1633576100},
+  number={16},
+  pages={9383--9387},
+  year={2003},
+  publisher={National Acad Sciences}
+}
+
+
+@article{ulrich2007null,
+  title={Null model analysis of species nestedness patterns},
+  author={Ulrich, W. and Gotelli, N. J.},
+  journal={Ecology},
+  volume={88},
+  doi={10.1890/06-1208.1},
+  number={7},
+  pages={1824--1831},
+  year={2007},
+  publisher={Eco Soc America}
+}
+
+
+ @Manual{oksanen2013vegan2,
+    title = {vegan: Community Ecology Package},
+    author = {J. Oksanen and F. Guillaume Blanchet and R. Kindt and P. Legendre and P. R. Minchin and R. B. O'Hara and G. L. Simpson and P. Solymos and M. H. H. Stevens and H. Wagner},
+    year = {2013},
+    note = {R package version 2.0-10},
+    url = {http://CRAN.R-project.org/package=vegan},
+  }
+
+
+
+@Article{DormannBipartitePackage,
+    title = {Introducing the bipartite Package: Analysing Ecological Networks.},
+    author = {C. F. Dormann and B. Gruber and J. Fruend},
+    journal = {R News},
+    ISSN={1609-3631},
+    volume = {8},
+    number = {2},
+    pages = {8-11},
+    year = {2008},
+  }
+
+@article{brualdi1999nested,
+  title={Nested species subsets, gaps, and discrepancy},
+  author={Brualdi, R. A. and Sanderson, J. G.},
+  journal={Oecologia},
+  volume={119},
+  doi={10.1007/s004420050784},
+  number={2},
+  pages={256--264},
+  year={1999},
+  publisher={Springer}
+}
+
+
+@article{jonhson2013factors,
+  title={Factors determining nestedness in complex networks},
+  author={Johnson, S. and Dom{\'\i}nguez-Garc{\'\i}a, V. and Mu{\~n}oz, M. A.},
+  journal={PloS one},
+  volume={8},
+  number={9},
+  pages={e74025},
+  doi = {10.1371/journal.pone.0074025},
+  year={2013},
+  publisher={Public Library of Science}
+}
+
+
+@article{flores2011statistical,
+  title={Statistical structure of host--phage interactions},
+  author={Flores, C. O. and Meyer, J. R. and Valverde, S. and Farr, L. and Weitz, J. S.},
+  journal={Proceedings of the National Academy of Sciences},
+  volume={108},
+  number={28},
+  pages={E288--E297},
+  year={2011},
+  doi={10.1073/pnas.1101595108},
+  publisher={National Acad Sciences}
+}
+
+
+@article{gotelli2011over,
+  title={Over-reporting bias in null model analysis: a response to Fayle and Manica (2010)},
+  author={Gotelli, N. J. and Ulrich, W.},
+  journal={Ecological Modelling},
+  volume={222},
+  doi={10.1016/j.ecolmodel.2010.11.008},
+  number={7},
+  pages={1337--1339},
+  year={2011},
+  publisher={Elsevier}
+}
+
+@article{dalsgaard2013historical,
+  title={Historical climate-change influences modularity and nestedness of pollination networks},
+  author={Dalsgaard, B. and Tr{\o}jelsgaard, K. and Gonz{\'a}lez, A. M. M and Nogu{\'e}s-Bravo, D. and Ollerton, J. and Petanidou, T. and Sandel, B. and Schleuning, M. and Wang, Z. and Rahbek, C. and others},
+  journal={Ecography},
+  doi={10.1111/j.1600-0587.2013.00201.x},
+  volume={36},
+  number={12},
+  pages={1331--1340},
+  year={2013},
+  publisher={Wiley Online Library}
+}
+
+
+@article{bustos2012dynamics,
+  title={The Dynamics of Nestedness Predicts the Evolution of Industrial Ecosystems},
+  author={Bustos, S. and Gomez, C. and Hausmann, R. and Hidalgo, C. A.},
+  journal={PloS one},
+  volume={7},
+  doi={10.1371/journal.pone.0049393},
+  number={11},
+  pages={e49393},
+  year={2012},
+  publisher={Public Library of Science}
+}
+
+@article{saavedra2011strong,
+  title={Strong contributors to network persistence are the most vulnerable to extinction},
+  author={Saavedra, S. and Stouffer, D. B. and Uzzi, B. and Bascompte, J.},
+  journal={Nature},
+  volume={478},
+  doi={10.1038/nature10433},
+  number={7368},
+  pages={233--235},
+  year={2011},
+  publisher={Nature Publishing Group}
+}
+
+@article{ulrich2009consumer,
+  title={A consumer's guide to nestedness analysis},
+  author={Ulrich, W. and Almeida-Neto, M. and Gotelli, N. J.},
+  journal={Oikos},
+  volume={118},
+  number={1},
+  doi={10.1111/j.1600-0706.2008.17053.x},
+  pages={3--17},
+  year={2009},
+  publisher={Wiley Online Library}
+}
+
+@article{beckett2013coevolutionary,
+  title={Coevolutionary diversification creates nested-modular structure in phage--bacteria interaction networks},
+  author={Beckett, S. J. and Williams, H. T. P.},
+  journal={Interface Focus},
+  volume={3},
+  number={6},
+  pages={20130033},
+  doi={0.1098/rsfs.2013.0033},
+  year={2013},
+  publisher={The Royal Society}
+}
+
+
+@article{Poisot2013Whencomplex,
+	title={When is an ecological network complex? Connectance drives degree distribution and emerging network properties.},
+	author={Poisot, T. and Gravel, D.},
+	journal={PeerJ},
+	year={2014},
+	volume={2},
+	doi={10.7717/peerj.251},
+	pages={e251}
+}
+
+
+@article{thebault2010stability,
+  title={Stability of ecological communities and the architecture of mutualistic and trophic networks},
+  author={Th{\'e}bault, E. and Fontaine, C.},
+  journal={Science},
+  volume={329},
+  number={5993},
+  doi={10.1126/science.1188321},
+  pages={853--856},
+  year={2010},
+  publisher={American Association for the Advancement of Science}
+}
+
+
+@article{james2012disentangling,
+  title={Disentangling nestedness from models of ecological complexity},
+  author={James, A. and Pitchford, J. W. and Plank, M. J.},
+  journal={Nature},
+  volume={487},
+  number={7406},
+  doi={10.1038/nature11214},
+  pages={227--230},
+  year={2012},
+  publisher={Nature Publishing Group}
+}
+
+@book{hulten1937outline,
+  title={Outline of the history of arctic and boreal biota during the Quaternary period: their evolution during and after the glacial period as indicated by the equiformal progressive areas of present plant species},
+  author={Hult{\'e}n, Eric},
+  volume={1},
+  year={1937},
+  publisher={Bokf{\"o}rlags Aktiebolaget Thule}
+}
+
+@article{daubenmire1975floristic,
+  title={Floristic plant geography of eastern Washington and northern Idaho},
+  author={Daubenmire, R},
+  journal={Journal of Biogeography},
+  pages={1--18},
+  year={1975},
+  publisher={JSTOR}
+}
+
+
+@book{darlington1957zoogeography,
+  title={Zoogeography: the geographical distribution of animals},
+  author={Darlington, Philip Jackson},
+  year={1957},
+  publisher={Wiley, New York}
+}
+
+
+
+@inproceedings{chavez2013detecting,
+  title={Detecting regime shifts in artificial ecosystems},
+  author={Ch{\'a}vez, Vasthi Alonso and Doncaster, C Patrick and Dearing, John A and Wang, Rong and Huang, Jing-Lun and Dyke, James G},
+  booktitle={Advances in Artificial Life, ECAL},
+  volume={12},
+  doi={10.7551/978-0-262-31709-2-ch089}, 
+  pages={625--632},
+  year={2013}
+}
+
+
+@article{csermely2013structure,
+  title={Structure and dynamics of core/periphery networks},
+  author={Csermely, Peter and London, Andr{\'a}s and Wu, Ling-Yun and Uzzi, Brian},
+  journal={Journal of Complex Networks},
+  volume={1},
+  number={2},
+  doi={10.1093/comnet/cnt016},
+  pages={93--123},
+  year={2013},
+  publisher={Oxford University Press}
+}
+
+
+
+@article{gotelli2000null,
+  title={Null model analysis of species co-occurrence patterns},
+  author={Gotelli, Nicholas J},
+  journal={Ecology},
+  volume={81},
+  number={9},
+  doi={10.1890/0012-9658(2000)081[2606:NMAOSC]2.0.CO;2},
+  pages={2606--2621},
+  year={2000},
+  publisher={Eco Soc America}
+}
+
+
+@article{piepenbrink2013methodological,
+  title={Methodological Advances in the Analysis of Bipartite Networks An Illustration Using Board Interlocks in Indian Firms},
+  author={Piepenbrink, Anke and Gaur, Ajai S},
+  journal={Organizational Research Methods},
+  volume={16},
+  doi={10.1177/1094428113478838 },
+  number={3},
+  pages={474--496},
+  year={2013},
+  publisher={SAGE Publications}
+}
+
+
+@article{melo2014treenodf,
+  title={treeNODF: nestedness to phylogenetic, functional and other tree-based diversity metrics},
+  author={Melo, Adriano S and Cianciaruso, Marcus V and Almeida-Neto, M{\'a}rio},
+  journal={Methods in Ecology and Evolution},
+  doi={10.1111/2041-210X.12185},
+  year={2014},
+  publisher={Wiley Online Library}
+}
+
+
+@article{fraser2014geothermal,
+  title={Geothermal activity helps life survive glacial cycles},
+  author={Fraser, Ceridwen I and Terauds, Aleks and Smellie, John and Convey, Peter and Chown, Steven L},
+  journal={Proceedings of the National Academy of Sciences},
+  pages={201321437},
+  doi={10.1073/pnas.1321437111},
+  year={2014},
+  publisher={National Acad Sciences}
+}
+
+
+
+@article{baselga2012relationship,
+  title={The relationship between species replacement, dissimilarity derived from nestedness, and nestedness},
+  author={Baselga, Andr{\'e}s},
+  journal={Global Ecology and Biogeography},
+  volume={21},
+  number={12},
+  doi={10.1111/j.1466-8238.2011.00756.x},
+  pages={1223--1232},
+  year={2012},
+  publisher={Wiley Online Library}
+}
+
+
+@article{tim2012structure,
+  title={Structure and mechanism of diet specialisation: testing models of individual variation in resource use with sea otters},
+  author={Tinker, M.T. and Guimar{\~a}es, P. R. and Novak, Mark and Marquitti, Flavia Maria Darcie and Bodkin, James L and Staedler, Michelle and Bentall, Gena and Estes, James A},
+  journal={Ecology letters},
+  volume={15},
+  number={5},
+  doi={10.1111/j.1461-0248.2012.01760.x},
+  pages={475--483},
+  year={2012},
+  publisher={Wiley Online Library}
+}
+
+@article{gotelli2001research,
+  title={Research frontiers in null model analysis},
+  author={Gotelli, N. J.},
+  journal={Global ecology and biogeography},
+  volume={10},
+  number={4},
+  doi={10.1046/j.1466-822X.2001.00249.x},
+  pages={337--343},
+  year={2001},
+  publisher={Wiley Online Library}
+}
+
+
+@article{lever2014sudden,
+  title={The sudden collapse of pollinator communities},
+  author={Lever, J Jelle and Nes, Egbert H and Scheffer, Marten and Bascompte, Jordi},
+  journal={Ecology letters},
+  volume={17},
+  number={3},
+  pages={350--359},
+  doi={10.1111/ele.12236},
+  year={2014},
+  publisher={Wiley Online Library}
+}
+
+
+

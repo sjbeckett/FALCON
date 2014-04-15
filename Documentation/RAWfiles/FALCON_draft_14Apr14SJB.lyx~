@@ -1,0 +1,3996 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{lineno}
+\linenumbers
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 7text%
+\topmargin 7theight%
+\rightmargin 7text%
+\bottommargin 7theight%
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes true
+\output_changes true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+FALCON: Efficient statistical analysis of nestedness in bipartite networks
+\end_layout
+
+\begin_layout Author
+Stephen J.
+ Beckett*, Chris A.
+ Boulton, Hywel T.
+ P.
+ Williams
+\end_layout
+
+\begin_layout Address
+\align center
+College of Life and Environmental Sciences, University of Exeter, Exeter,
+ UK
+\end_layout
+
+\begin_layout Standard
+\align center
+*author for correspondence: S.J.Beckett@exeter.ac.uk
+\end_layout
+
+\begin_layout Abstract
+1.
+ Nestedness is a statistical measure used to interpret bipartite interaction
+ data in several ecological and evolutionary contexts, e.g.
+ biogeography (species-site relationships) and species interactions (plant-polli
+nator and host-parasite networks).
+ Multiple methods have been used to evaluate nestedness, which differ in
+ how the metrics for nestedness are determined.
+ Furthermore, several different null models have been used to calculate
+ statistical significance of nestedness scores.
+ The profusion of measures and null models, many of which give conflicting
+ results, is problematic for comparison of nestedness across different studies.
+\end_layout
+
+\begin_layout Abstract
+2.
+ We developed the FALCON software package to allow easy and efficient comparison
+ of nestedness scores and statistical significances for a given input network,
+ using a selection of the more popular measures and null models from the
+ current literature.
+ FALCON currently includes six measures and five null models for nestedness
+ in binary networks, and two measures and four null models for nestedness
+ in weighted networks.
+ The FALCON software is designed to be efficient and easy to use.
+ FALCON code is offered in three languages (R, MATLAB, Octave) and is designed
+ to be modular and extensible, enabling users to easily expand its functionality
+ by adding further measures and null models.
+\end_layout
+
+\begin_layout Abstract
+3.
+ FALCON provides a robust methodology for comparing the strength and significanc
+e of nestedness in a given bipartite network using multiple measures and
+ null models.
+ It includes an 
+\begin_inset Quotes eld
+\end_inset
+
+adaptive ensemble
+\begin_inset Quotes erd
+\end_inset
+
+ method to 
+\color black
+increase computational efficiency 
+\color inherit
+and reduce under-sampling of the null distribution when calculating statistical
+ significance.
+ It can work with binary or weighted input networks.
+ 
+\end_layout
+
+\begin_layout Abstract
+4.
+ FALCON is a response to the proliferation of different nestedness measures
+ and associated null models in the literature.
+ It allows easy and efficient calculation of nestedness scores and statistical
+ significances using different methods, enabling comparison of results from
+ different studies and thereby supporting theoretical study of the causes
+ and implications of nestedness in different biological contexts.
+ We hope FALCON will be a useful tool for the research community and promote
+ greater synthesis and theoretical insight about nestedness in bipartite
+ networks.
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+
+\series bold
+Key words:
+\series default
+ null models, binary networks, ecological networks, species interactions,
+ host-parasite, mutualism
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+
+\series bold
+Running title:
+\series default
+ Analysis of nestedness in bipartite networks 
+\end_layout
+
+\begin_deeper
+\begin_layout Section
+Introduction
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Nestedness is a statistical property of systems where two kinds of entity
+ interact.
+ Originally used as a metric for species-site distributions 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "atmar1993measure,brualdi1999nested"
+
+\end_inset
+
+, nestedness has recently gathered much attention as a metric for bipartite
+ species interaction networks, e.g.
+ plant-pollinator mutualisms 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "bascompte2003nested,james2012disentangling"
+
+\end_inset
+
+ and host-virus interactions 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "flores2011statistical,Flores2013multiscaleGeographicPhage,beckett2013coevolutionary"
+
+\end_inset
+
+.
+ Various discussions have considered the sources of nestedness in such systems
+ and its implications for ecological dynamics
+\color black
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "thebault2010stability,saavedra2011strong,bustos2012dynamics,james2012disentangling,staniczenko2013ghost,McQuaid201353,lever2014sudden"
+
+\end_inset
+
+
+\color inherit
+.
+ However, it is unclear how to systematically compare results for different
+ datasets.
+ Multiple methods for measuring nestedness have been used in different studies,
+ along with multiple approaches to calculating statistical significance
+ of the measured values.
+ This provides a large number of ways in which nestedness could be evaluated
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gotelli2000null,ulrich2007null,csermely2013structure"
+
+\end_inset
+
+.
+ Before theoretical investigation of the mechanisms of nestedness can be
+ properly investigated, robust measures and statistical tests for nestedness
+ are required to allow comparison of results from different studies.
+ 
+\end_layout
+
+\begin_layout Standard
+Here we present FALCON -- a free software package that allows the user to
+ easily compute several measures of nestedness and associated statistical
+ significances based on a selection of null models.
+ FALCON stands for 
+\begin_inset Quotes eld
+\end_inset
+
+Framework for Adaptive ensembLes for the Comparison Of Nestedness
+\begin_inset Quotes erd
+\end_inset
+
+.
+ FALCON operates on any form of bipartite interaction data represented as
+ a matrix of associations and is set up to be deliberately 'blind' to the
+ source and interpretation of input data.
+ FALCON is based on the assumption that nestedness is a general statistical
+ property of matrices and therefore its measurement should be independent
+ of context or interpretation.
+ FALCON calculates nestedness as a context-free statistical property of
+ a matrix, by returning the nestedness score for the most-nested configuration
+ of the input matrix.
+ Since calculating statistical significance of nestedness scores can be
+ computationally demanding, involving generation of a large ensemble of
+ matrices from a null distribution, FALCON uses a novel 
+\begin_inset Quotes eld
+\end_inset
+
+adaptive ensemble
+\begin_inset Quotes erd
+\end_inset
+
+ method to improve efficiency.
+\end_layout
+
+\begin_layout Standard
+The FALCON package is available for three commonly used numerical analysis
+ platforms: MATLAB, Octave and R.
+ MATLAB (
+\bar under
+\color blue
+
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.mathworks.co.uk/products/matlab/"
+
+\end_inset
+
+
+\bar default
+\color inherit
+) is a commercial software platform, while Octave (
+\bar under
+\color blue
+
+\begin_inset CommandInset href
+LatexCommand href
+target "https://www.gnu.org/software/octave/"
+
+\end_inset
+
+
+\bar default
+\color inherit
+) and R (
+\bar under
+\color blue
+
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.r-project.org/"
+
+\end_inset
+
+
+\bar default
+\color inherit
+) are both freely available open source platforms.
+ FALCON can be freely downloaded on Github (
+\bar under
+\color blue
+
+\begin_inset CommandInset href
+LatexCommand href
+name "http://github.com/sjbeckett/FALCON"
+target "http://github.com/sjbeckett/FALCON"
+
+\end_inset
+
+
+\bar default
+\color inherit
+) or figshare
+\begin_inset CommandInset citation
+LatexCommand citep
+key "FALCON"
+
+\end_inset
+
+
+\color black
+ and all code is open and accessible
+\color inherit
+.
+ A guide to downloading, installing and running FALCON accompanies the code.
+ This document describes the assumptions on which FALCON is based, how it
+ calculates nestedness and statistical significance, and gives details of
+ the adaptive ensemble method used to improve computational efficiency.
+ 
+\end_layout
+
+\begin_layout Section
+What is nestedness?
+\end_layout
+
+\begin_layout Standard
+Nestedness is a statistical property of bipartite interaction data presented
+ in matrix form.
+ In a perfectly nested matrix, the entries in each successive row are a
+ strict subset of those in the previous row, while the entries in each successiv
+e column are a strict subset of those in the previous column (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Perfectlynested"
+
+\end_inset
+
+).
+ Interpretation of nestedness depends on context.
+\end_layout
+
+\begin_layout Standard
+The concept of nestedness was first described in studies of how species
+ distributions varied between sites 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "hulten1937outline,darlington1957zoogeography,daubenmire1975floristic"
+
+\end_inset
+
+, and later defined quantitatively as measuring the `amount of order/disorder'
+ in matrices 
+\color black
+representing presence/absence of species in island communities 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "atmar1993measure"
+
+\end_inset
+
+.
+ Used in this way, nestedness is calculated from 
+\color inherit
+a matrix of presence-absence data where rows are species and columns are
+ sampling sites along some environmental or spatial gradient.
+ A perfectly 
+\begin_inset Quotes eld
+\end_inset
+
+nested
+\begin_inset Quotes erd
+\end_inset
+
+ matrix
+\color red
+ 
+\color inherit
+(see 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Perfectlynested"
+
+\end_inset
+
+) would be achieved when the set of species present at each site along the
+ gradient is a subset of the species present at the previous site.
+ Since then the concept of nestedness has been extended in various directions;
+ see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "ulrich2009consumer"
+
+\end_inset
+
+ for an historical overview of the nestedness concept.
+ Nestedness has continued to be applied to spatial patterning 
+\color black
+(e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "fraser2014geothermal"
+
+\end_inset
+
+)
+\color inherit
+ and has been linked with 
+\begin_inset Formula $\beta$
+\end_inset
+
+-diversity 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "baselga2012relationship"
+
+\end_inset
+
+, but has also been applied to study mutualistic or antagonistic species-species
+ interactions 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "fortuna2010nestedness,joppa2010nestedness"
+
+\end_inset
+
+, species-time relationships for a single site 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "chavez2013detecting"
+
+\end_inset
+
+, and several other types of bipartite networks 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "saavedra2011strong,tim2012structure,bustos2012dynamics,dalsgaard2013historical,piepenbrink2013methodological,melo2014treenodf"
+
+\end_inset
+
+.
+ For pairwise interactions (e.g.
+ plant-pollinator or host-parasite systems), nestedness has been interpreted
+ as placing species along a gradient of generalism-specialism in the number
+ of partners they interact with; in this context, perfect nestedness is
+ achieved when the most specialist species of one class interacts with the
+ most generalist species of the other class.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename fig1a.eps
+	height 50pheight%
+	BoundingBox 198bp 66bp 396bp 776bp
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Perfectly nested, weakly nested, and randomly connected matrices.
+ White squares indicate connections between two kinds of entity arranged
+ in rows and columns.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Perfectlynested"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nestedness is calculated from a biadjacency matrix representing pairwise
+ interactions between two kinds of entity.
+ 
+\color black
+T
+\color inherit
+he order of rows and columns for a biadjacency matrix is arbitrary; rows
+ and columns can be permuted without affecting the underlying topology of
+ the interaction network.
+ Any non-arbitrary ordering of rows and columns in the matrix representation
+ necessitates the use of additional contextual information to specify which
+ order rows and columns should take.
+ While some datasets may suggest a 
+\begin_inset Quotes eld
+\end_inset
+
+natural
+\begin_inset Quotes erd
+\end_inset
+
+ ordering to rows and columns in the matrix representation of data (e.g.
+ when one of the dimensions represents an environmental/spatial/temporal
+ gradient), for many applications of nestedness there is no natural ordering
+ (e.g.
+ species interactions).
+ 
+\end_layout
+
+\begin_layout Standard
+As stated above, we consider that nestedness should be a context-free metric,
+ so that it can be applied to data without requiring any supplemental informatio
+n on row/column ordering.
+ This assumption implies that the ordering of rows and columns should not
+ affect the measurement of nestedness.
+ While some nestedness measures are insensitive to row/column ordering,
+ several of the most commonly used measures are highly sensitive to ordering,
+ introducing indeterminacy to the quantification of nestedness when rows/columns
+ are ordered arbitrarily.
+ To avoid this indeterminacy and return a single robust nestedness score
+ for a given input matrix, FALCON 
+\color black
+can
+\color inherit
+ sort the rows and columns such that nestedness (however calculated) is
+ maximised.
+ Since re-ordering rows/columns in a matrix representation does not alter
+ the structural information (node adjacency) of the underlying data, this
+ re-ordering is a reasonable approach and makes measurement of nestedness
+ more consistent.
+\end_layout
+
+\begin_layout Section
+Measures of nestedness in FALCON 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Measures-of-nestedness"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nestedness is most commonly calculated for binary data representing presence/abs
+ence of an interaction between two entities, but nestedness can also be
+ calculated for weighted data that also indicate the strength of the interaction.
+ The methods used to calculate nestedness vary depending on whether binary
+ or weighted interaction data is provided.
+ The nestedness measures available in FALCON are shown and briefly described
+ below and in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "tab:Nestedness-measures-available"
+
+\end_inset
+
+; further details are given in
+\color black
+ Appendix A.
+
+\color red
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways true
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="15" columns="5">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shorthand
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary/Weighted
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Brief description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reference
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nestedness based 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NODF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pairwise row and column comparisons
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "almeida2008consistent"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+on overlap and decreasing fill
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Manhattan distance
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MD
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sum of row and column indexes of connections
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "corso2012nestedness"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nestedness temperature 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NTC
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Difference from an 'isocline of perfect order'
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "atmar1993measure"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+calculator
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "oksanen2013vegan2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Jonhson, Domínguez-García 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+JDM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Measure of dissassortivity using
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "jonhson2013factors"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+& Muñoz
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+configuration model
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Discrepancy
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+BR
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Difference from a `maximally packed' matrix
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "brualdi1999nested"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Weighted NODF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+WNODF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Weighted
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Weighted version of NODF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "almeida2011straightforward"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color black
+Spectral radius
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color black
+SR
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color black
+Both
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color black
+Maximum real eigenvalue of adjacency matrix
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color black
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "staniczenko2013ghost"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Nestedness measures available in FALCON.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Nestedness-measures-available"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The nestedness measures considered here are not trivial variations upon
+ each other, but differ significantly in their derivations.
+ However, some similarities can be drawn.
+ Spectral radius (SR)
+\begin_inset CommandInset citation
+LatexCommand citep
+key "staniczenko2013ghost"
+
+\end_inset
+
+ and the measure of Johnson, Domínguez-García, & Muñoz
+\begin_inset CommandInset citation
+LatexCommand citep
+key "jonhson2013factors"
+
+\end_inset
+
+ (JDM) are invariant to the ordering of rows and columns in the network
+ and are calculated using the adjacency matrix of the network.
+ On the other hand, discrepancy (BR) 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "brualdi1999nested"
+
+\end_inset
+
+, Manhattan distance (MD) 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "corso2012nestedness"
+
+\end_inset
+
+ and nestedness based on overlap and decreasing fill (NODF) 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "almeida2008consistent"
+
+\end_inset
+
+ are all sensitive to row/column ordering and maximised when rows/columns
+ are ranked by degree.
+ The nestedness temperature calculator (NTC)
+\begin_inset CommandInset citation
+LatexCommand citep
+key "atmar1993measure,oksanen2013vegan2"
+
+\end_inset
+
+ involves sorting of rows and columns against the `isocline of perfect order'
+ (see 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:NTC-figure-showing-isocline"
+
+\end_inset
+
+) such that it maximises connections above the isocline and minimises connection
+s below the isocline.
+ BR is similarly calculated relative to an idealised `maximally packed'
+ matrix.
+ NODF is found through pairwise comparisons of overlap between subsequent
+ rows and columns, whilst MD is found by assigning a weight to each connection
+ as a sum of it's row and column indexes.
+ The measures also differ in how nestedness is scored; the degree of nestedness
+ in a network increases with increasing measure score for JDM, NODF and
+ SR, but with decreasing measure score for BR, MD and NTC.
+\end_layout
+
+\begin_layout Section
+Comparison of nestedness scores
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Null-models"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nestedness is strongly sensitive to the size (number of rows and columns)
+ and fill (number of non-zero entries) of the input matrix 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "rodriguez2006new"
+
+\end_inset
+
+
+\color black
+.
+
+\color inherit
+ This is problematic in practical terms, since we often wish to compare
+ nestedness of matrices that differ in these basic properties; in fact,
+ cases where we compare empirically derived matrices with identical size
+ and fill are an exception.
+ Thus comparison of absolute values of nestedness metrics are not informative
+ and may be misleading.
+ To compare nestedness of matrices with differing size and fill, observed
+ nestedness should always be interpreted in the context of a null distribution
+ of matrices with similar properties.
+ Measuring observed nestedness relative to expected nestedness derived from
+ a null distribution of similar matrices allows determination of both effect
+ size (e.g.
+ as a 
+\emph on
+z
+\emph default
+-score, which is commonly used to compare different nestedness schemes 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ulrich2009consumer,ulrich2012meanings"
+
+\end_inset
+
+)) and statistical significance (e.g.
+ as a 
+\emph on
+p
+\emph default
+-value giving the expected frequency of the observed score in the null distribut
+ion).
+ This approach necessitates choice of a suitable null model and generation
+ of a distribution of random matrices drawn from it.
+ 
+\end_layout
+
+\begin_layout Standard
+In the present context, a null model is a method for creating a distribution
+ of matrices that conserve some properties of the input matrix while varying
+ other properties at random 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gotelli2001research"
+
+\end_inset
+
+.
+ We continue the 
+\begin_inset Quotes eld
+\end_inset
+
+context-free
+\begin_inset Quotes erd
+\end_inset
+
+ approach in our treatment of null models; to allow comparison of nestedness
+ across different scenarios, a good null model should not make assumptions
+ about the mechanisms by which data were generated, but treat the matrix
+ as an independent data structure.
+ However, to be comparable to the input matrix, null matrices must conserve
+ some key matrix properties (such as size and fill) on which nestedness
+ depends.
+ The null models available in FALCON are given in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "tab:Null-models-in-FALCON"
+
+\end_inset
+
+; further detail is given in Appendix B.
+ FALCON includes some of the more popular null models from the literature,
+ alongside some additional null models that we feel can be useful.
+ Null models vary in whether the original data is binary or quantitative,
+ and in which properties of the original input matrix are preserved.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways true
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="14" columns="5">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0">
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary/weighted
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Conserved features
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reference
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shuffles positions randomly
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shape, Fill
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color black
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "staniczenko2013ghost"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Permutations of structure with same node degrees
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shape, Fill, Degree
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "miklos2004randomization"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "gotelli2011over"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CC
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Some structure is preserved, rest is shuffled
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shape, Fill
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+DD
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Determined probabilistically by node degree
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Probabilistic Degree
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "bascompte2003nested"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+EE
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Determined probabilistically by fill
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Probabilistic Fill
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary Shuffle
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Order of weighted links is swapped
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Weighted
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary positions, weights
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "staniczenko2013ghost"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CRT
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Random weights where row totals conserved
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Weighted
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary positions, row totals
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CCT
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Random weights where column totals conserved
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Weighted
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary positions, column totals
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RCTA
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Average of conserve row totals and column totals
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Weghted
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Binary positions
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Null models in FALCON.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Null-models-in-FALCON"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+How FALCON works
+\end_layout
+
+\begin_layout Subsection
+Inputs and outputs
+\end_layout
+
+\begin_layout Standard
+FALCON requires several inputs: 
+\end_layout
+
+\begin_layout Itemize
+an input network in the form of a bipartite matrix
+\end_layout
+
+\begin_layout Itemize
+whether binary or quantitative nestedness should be investigated (quantitative
+ matrices can be analysed using binary measures)
+\end_layout
+
+\begin_layout Itemize
+whether to sort rows and columns to maximise nestedness score
+\end_layout
+
+\begin_layout Itemize
+which nestedness measures should be used
+\end_layout
+
+\begin_layout Itemize
+which null models nestedness should be tested under
+\end_layout
+
+\begin_layout Itemize
+whether the ensemble of null models should be created with a fixed number
+ or adaptively chosen
+\end_layout
+
+\begin_layout Itemize
+whether or not to plot the distributions of nestedness scores
+\end_layout
+
+\begin_layout Standard
+Output is returned to the user in the form of:
+\end_layout
+
+\begin_layout Itemize
+the most nested configuration of the input matrix
+\end_layout
+
+\begin_layout Itemize
+the nestedness measure(s) of the input matrix
+\end_layout
+
+\begin_layout Itemize
+the expected value of nestedness under the null model(s) (as the mean measure
+ of matrices created in the ensemble)
+\end_layout
+
+\begin_layout Itemize
+the number of ensemble members used to calculate significance in each null
+ model
+\end_layout
+
+\begin_layout Itemize
+the statistical significance of the nestedness of the input matrix against
+ each null model as a p-value
+\end_layout
+
+\begin_layout Itemize
+the standard deviation and sample 
+\emph on
+z
+\emph default
+-scores of the measure in the ensemble as well as other properties.
+\end_layout
+
+\begin_layout Subsection
+What FALCON does
+\end_layout
+
+\begin_layout Standard
+FALCON follows the process shown in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:FALCON-algorithmic-procedure"
+
+\end_inset
+
+.
+ First it sorts the user input matrix into a maximally nested configuration
+ and removes any empty rows/columns before finding the nestedness of this
+ matrix using the users chosen measures.
+ Then FALCON goes through each of the user specified null models one by
+ one, creating an ensemble of null matrices according to the rules of each
+ null model.
+ Each null matrix is then sorted and measured by each of the chosen nestedness
+ measures.
+ Thus, for each null model, nestedness measures are calculated for each
+ of the null matrices in a single null ensemble, enabling direct comparison
+ of results.
+ The size of the null ensemble is determined by the input choice of using
+ either the fixed or adaptive ensemble size (see 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sub:Size-of-null"
+
+\end_inset
+
+).
+ Statistics are computed from the measures found in the null ensemble (and
+ the direction in which that nestedness measure is calculated), before the
+ next null model ensemble is instantiated.
+ Once all null models have been computed the results are returned to the
+ user.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename FALCONflowchart3b.eps
+	lyxscale 50
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+FALCON algorithmic procedure
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:FALCON-algorithmic-procedure"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+This is much better.
+ One further suggestion is to add yes/no tags to the decision branches.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Direction of increasing nestedness
+\end_layout
+
+\begin_layout Standard
+For different nestedness measures, increasing scores can represent either
+ increasing or decreasing nestedness as discussed in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sec:Measures-of-nestedness"
+
+\end_inset
+
+.
+ FALCON initially determines whether a higher measure score is related to
+ greater nestedness (or vice versa) in the chosen measure by comparing the
+ scores returned for a highly nested network (see 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Weighted-nested"
+
+\end_inset
+
+A) and a highly non-nested network (a weighted checkerboard configuration;
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Weighted-nested"
+
+\end_inset
+
+B), for which the fill (number of non-zero elements) and element sums are
+ equal.
+ The direction of increasing nestedness for a given measure is used during
+ calculation of statistical significance.
+ This method of determining direction each time the algorithm runs is included
+ to allow easy extensibility; if a new measure is added, FALCON will automatical
+ly determine which direction indicates increasing nestedness.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+(A)
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\qquad\quad\;\qquad\qquad\qquad\qquad\;\quad\qquad$
+\end_inset
+
+(B)
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Formula $\left(\begin{array}{cccccccccc}
+10 & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2 & 1\\
+9 & 8 & 7 & 6 & 5 & 4 & 3 & 2 & 1 & 0\\
+8 & 7 & 6 & 5 & 4 & 3 & 2 & 1 & 0 & 0\\
+7 & 6 & 5 & 4 & 3 & 2 & 1 & 0 & 0 & 0\\
+6 & 5 & 4 & 3 & 2 & 1 & 0 & 0 & 0 & 0\\
+5 & 4 & 3 & 2 & 1 & 0 & 0 & 0 & 0 & 0\\
+4 & 3 & 2 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+3 & 2 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+2 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+\end{array}\right)\;\qquad\qquad\;\left(\begin{array}{cccccccccc}
+4 & 4 & 4 & 0 & 4 & 0 & 4 & 0 & 0 & 0\\
+0 & 4 & 0 & 4 & 0 & 4 & 0 & 4 & 0 & 4\\
+4 & 0 & 4 & 4 & 4 & 0 & 4 & 0 & 4 & 0\\
+0 & 4 & 0 & 4 & 0 & 4 & 0 & 4 & 0 & 4\\
+4 & 0 & 4 & 0 & 4 & 4 & 4 & 0 & 4 & 0\\
+0 & 4 & 0 & 4 & 0 & 4 & 0 & 4 & 0 & 4\\
+4 & 0 & 4 & 0 & 4 & 0 & 4 & 4 & 4 & 0\\
+0 & 4 & 0 & 4 & 0 & 4 & 0 & 4 & 0 & 4\\
+4 & 0 & 4 & 0 & 4 & 0 & 4 & 0 & 4 & 4\\
+0 & 4 & 0 & 4 & 0 & 4 & 0 & 4 & 0 & 4
+\end{array}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+(A) Weighted nested matrix.
+ (B) Weighted non-nested matrix (checkerboard).
+ Both (A) and (B) have 55 non-zero elements that sum to 220.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Weighted-nested"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Initial sort
+\end_layout
+
+\begin_layout Standard
+
+\color black
+For efficiency, FALCON is set up to initially sort the input matrix by row
+ and column degrees for calculation of BR, MD and NODF, retains this sorted
+ configuration for calculation of JDM and SR, and subsequently re-sorts
+ for NTC in order to find the maximal nestedness of a binary matrix.
+ For quantitative data, FALCON uses the same methods as for binary interactions,
+ but also utilises weight data to break symmetry when two rows (columns)
+ have the same degree; in this case, the row (column) which has greater
+ values for most overlapping elements is ranked highest.
+ Where two or more rows (columns) share the same degree and most overlapping
+ elements, the rows (columns) are ranked according to the total sum of row
+ (column) elements.
+ This sorting does not affect the underlying topology or the relationships
+ in the data.
+ FALCON also allows the user to decide if any sorting is performed, enabling
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+context free
+\begin_inset Quotes erd
+\end_inset
+
+ assumption to be relaxed (e.g.
+ for investigation of gradient-based nestedness 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ulrich2012meanings"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsection
+Size of null ensemble
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Size-of-null"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+FALCON uses a bootstrap method to calculate the statistical significance
+ of a given nestedness score, since the true null distributions of the test
+ statistics are not known.
+ The ensemble size used for this calculation can either be fixed or calculated
+ adaptively by FALCON to 
+\color black
+improve computational efficiency
+\color inherit
+ and reduce undersampling effects.
+ Note that the strongest significance that can be assigned is 
+\begin_inset Formula $p<\frac{1}{N}$
+\end_inset
+
+ where 
+\begin_inset Formula $N$
+\end_inset
+
+ is the ensemble size.
+\end_layout
+
+\begin_layout Subsubsection*
+Fixed
+\end_layout
+
+\begin_layout Standard
+The number of null matrices used to make up the ensemble is fixed by the
+ user.
+ This method is effective providing that the ensemble is large enough to
+ have statistical power; the larger the ensemble, the more power the test
+ has and the closer the answer will be to the 
+\emph on
+p
+\emph default
+-value for the (unknown) true null distribution.
+ However, it is not obvious how large the ensemble needs to be; in the literatur
+e, amongst others, 
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "joppa2010nestedness"
+
+\end_inset
+
+ use 1,000 null models in their ensembles, whilst
+\color black
+ 
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "McQuaid201353"
+
+\end_inset
+
+
+\color inherit
+ use 10,000, and 
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "Flores2013multiscaleGeographicPhage"
+
+\end_inset
+
+ use 100,000.
+ A large number of different null matrix configurations are possible for
+ a given input matrix and we may wish to avoid undersampling 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Poisot2013Whencomplex"
+
+\end_inset
+
+; however, at the same time very large ensembles can make the calculation
+ of significance computationally intractable.
+\end_layout
+
+\begin_layout Subsubsection*
+Adaptive
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Adaptive"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+FALCON includes a mechanism for adaptive determination of ensemble size.
+ This is intended to ensure robust statistics are achieved, avoiding concerns
+ about undersampling or oversampling 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Poisot2013Whencomplex"
+
+\end_inset
+
+, while minimising computational load.
+ The adaptive method works by creating two ensembles in parallel using the
+ same null model.
+ Starting with a minimum ensemble size of 500 in each group, the ensembles
+ are expanded until they show similar statistical properties.
+ This condition is met when the null hypothesis (both ensembles come from
+ the same distribution) of a Mann-Whitney U-test cannot be rejected at 10%
+ significance.
+ When this occurs, it suggests each group represents a good sample of the
+ underlying distribution, and the two groups are combined to form a single
+ null ensemble used to calculate final statistics.
+ The expansion of the size of the ensemble has an upper limit of 100,000
+ members in case the null hypothesis is always rejected.
+ The adaptive ensemble methods balances statistical precision with computational
+ efficiency; we conservatively use 1,000 as a minimum final ensemble size
+ such that a 
+\emph on
+p
+\emph default
+-value
+\color red
+ 
+\color black
+as low as 0.001 can be assigned.
+\end_layout
+
+\begin_layout Subsection
+Output Statistics
+\end_layout
+
+\begin_layout Subsubsection*
+
+\emph on
+p
+\emph default
+-value
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+p
+\emph default
+-value is the probability that a matrix drawn from the null distribution
+ will be more nested than the input matrix.
+ Low values (
+\begin_inset Formula $p\rightarrow0$
+\end_inset
+
+) indicate that the input matrix is highly nested relative to the null distribut
+ion; commonly a threshold of 
+\begin_inset Formula $p\leq0.05$
+\end_inset
+
+ or 
+\begin_inset Formula $p\leq0.01$
+\end_inset
+
+ is used to denote a statistically significant level of nestedness.Here 
+\begin_inset Formula $p$
+\end_inset
+
+ is calculated by counting the frequency of matrices in the null ensemble
+ that are more nested than the input matrix; for cases where no member of
+ the null ensemble is more nested than the input matrix we conservatively
+ assign 
+\begin_inset Formula $p<\frac{1}{N}$
+\end_inset
+
+ where 
+\begin_inset Formula $N$
+\end_inset
+
+ is the ensemble size.
+\end_layout
+
+\begin_layout Subsubsection*
+Normalised Temperature
+\end_layout
+
+\begin_layout Standard
+The normalised temperature is inspired by the 
+\begin_inset Formula $\tau$
+\end_inset
+
+-Temperature 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "corso2012nestedness"
+
+\end_inset
+
+.
+ It describes the relationship between the nestedness measure found for
+ the input matrix and the expected nestedness measure derived from the null
+ model ensemble.
+ It is described as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+T=\frac{Measure}{<Measure>}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $<Measure>$
+\end_inset
+
+ denotes the expected value.
+ In simple terms, the normalised temperature indicates whether the input
+ matrix is more or less nested than the expectation for a null distribution
+ of similar matrices.
+ Where the measure gives increasing scores with increasing nestedness, 
+\begin_inset Formula $T>1$
+\end_inset
+
+ indicates greater-than-expected nestedness.
+ Where the measure gives decreasing scores with increasing nestedness, 
+\begin_inset Formula $T<1$
+\end_inset
+
+ indicates greater-than-expected nestedness.
+\end_layout
+
+\begin_layout Subsubsection*
+Mean
+\end_layout
+
+\begin_layout Standard
+The mean average of the set of nestedness measure found for each of the
+ ensemble members is returned.
+\end_layout
+
+\begin_layout Subsubsection*
+Standard Deviation
+\end_layout
+
+\begin_layout Standard
+The standard deviation (
+\begin_inset Formula $\sigma$
+\end_inset
+
+) of the set of nestedness measures found for each of the ensemble members
+ is returned.
+\end_layout
+
+\begin_layout Subsubsection*
+Sample z-score
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+z
+\emph default
+-score, or standard score, is calculated as the difference between the nestednes
+s measure and its expected value divided by the standard deviation of the
+ sample: 
+\begin_inset Formula 
+\begin{equation}
+z=\frac{Measure-<Measure>}{\sigma}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is a measure of the number of standard deviations the nestedness measure
+ of the input matrix is above the expected value.
+ Hence, the way it should be interpreted, as with the normalised temperature,
+ depends on whether nestedness increases with increasing measure score.
+\end_layout
+
+\begin_layout Subsection
+Performance and complexity
+\end_layout
+
+\begin_layout Standard
+A user's choice of which null models and nestedness measures to use for
+ their analysis will depend on the questions they wish to ask of their data.
+ However, these choices also need to consider the computational resources
+ available for the task.
+ In 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:computationalperfromance"
+
+\end_inset
+
+ we show the time complexity to compute some of the nestedness measures
+ and null models that FALCON can perform.
+ The graphs below show the average time to measure a single matrix or generate
+ a single null matrix and the standard deviation from this.
+ 10 trials were used starting with different 10
+\begin_inset Formula $\times$
+\end_inset
+
+10 matrices.
+ In each trial each matrix was measured 1,000 times and 1,000 null matrices
+ were generated from the initial trial matrix.
+ The time taken to conduct each trial was then divided by 1,000 and the
+ average and standard deviation was calculated.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename BENCHMARK.eps
+	lyxscale 50
+	width 7cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+(A) Time taken to perform each of the binary nestedness measures on the
+ same 10
+\begin_inset Formula $\times$
+\end_inset
+
+10 matrix averaged over 1,000 measurements.
+ SR - spectral radius, MD - Manhattan distance, NTC - nestedness temperature
+ calculator, BR - discrepancy.
+ (B) Time taken to generate a 10
+\begin_inset Formula $\times$
+\end_inset
+
+10 null matrix using each of the binary null models averaged over 1,000
+ times.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:computationalperfromance"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Summary
+\end_layout
+
+\begin_layout Standard
+In this paper we have presented FALCON, a software tool for reliable and
+ efficient calculation of nestedness (and associated effect size and statistical
+ significance) based on a selection of popular nestedness measures and null
+ models used in the literature.
+ FALCON treats nestedness purely as a statistical property of a bipartite
+ matrix and removes any form of interpretation or contextual information
+ from the analysis.
+ This enables FALCON to be used to compare nestedness across a wide variety
+ of application areas, noting that the concept of nestedness has already
+ spread from its origin in island biogeography to include species-species
+ interactions and other scenarios, and is likely to find further application
+ in other domains.
+ The contribution of FALCON is to enable easy cross-comparison of observed
+ nestedness using different nestedness measures and null models.
+ We hope that this functionality will allow greater methodological uniformity
+ and comparability of studies of nestedness.
+ Uniformity of measurement and comparability of empirical results is an
+ important preliminary step that must be achieved to enable understanding
+ of the mechanistic basis and ecological (and otherwise) implications of
+ nestedness.
+ We hope that FALCON will be of use to other researchers and help illuminate
+ this intriguing property of bipartite networks in many natural systems.
+ 
+\end_layout
+
+\begin_layout Section*
+Acknowledgements
+\end_layout
+
+\begin_layout Standard
+We thank Virginia Domínguez-García with implementation of JDM nestedness.
+ S.J.B., C.A.B and H.T.P.W.
+ acknowledge funding from the University of Exeter.
+\end_layout
+
+\begin_layout Section
+Appendix A: Detailed description of nestedness measures in FALCON
+\end_layout
+
+\begin_layout Subsection
+Binary
+\end_layout
+
+\begin_layout Subsubsection*
+NODF
+\end_layout
+
+\begin_layout Standard
+The nestedness measure based on overlap and decreasing fill (NODF) was first
+ described by 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "almeida2008consistent"
+
+\end_inset
+
+ and has since become one of the most popular methods for describing the
+ nestedness of a matrix.
+ NODF can be found as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+NODF=\frac{N_{col}+N_{row}}{\frac{(c(c-1)}{2}+\frac{(r(r-1))}{2}}=\frac{2(N_{col}+N_{row})}{c(c-1)+r(r-1)}
+\end{equation}
+
+\end_inset
+
+Here 
+\begin_inset Formula $N_{col}$
+\end_inset
+
+ and 
+\begin_inset Formula $N_{row}$
+\end_inset
+
+ are scores found by pairwise comparison of rows and columns, 
+\begin_inset Formula $c$
+\end_inset
+
+ is the number of columns, and 
+\begin_inset Formula $r$
+\end_inset
+
+ is the number of rows.
+ 
+\begin_inset Formula $N_{col}$
+\end_inset
+
+ is found as the sum of scores from pairwise comparisons of each column
+ against all columns to its right.
+ If both columns have the same degree then the score is zero.
+ If they have different degrees, the score is the percentage of elements
+ in the second column which also appear in the first column.
+ 
+\begin_inset Formula $N_{rows}$
+\end_inset
+
+ is found similarly for pairwise comparisons of each row against all rows
+ below it.
+ The sum of 
+\begin_inset Formula $N_{col}$
+\end_inset
+
+ and 
+\begin_inset Formula $N_{row}$
+\end_inset
+
+ is then normalised by the total number of pairwise comparisons.
+ Values for NODF are between 0 (zero nestedness) and 100 (perfect nestedness).
+ If the input matrix is first sorted to maximise nestedness by rank ordering
+ rows and columns by degree, the form of NODF known as 
+\begin_inset Formula $NODF_{MAX}$
+\end_inset
+
+ is found 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "podani2012comparative"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+\begin_inset Formula $\tau$
+\end_inset
+
+-Temperature and Manhattan Distance
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $\mathbf{\tau}$
+\end_inset
+
+-Temperature 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "corso2012nestedness"
+
+\end_inset
+
+ is a nestedness measure based on relative distances between matrix elements.
+ Unlike other distance-based measures (such as NTC 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "atmar1993measure"
+
+\end_inset
+
+ and its better described successors BINMATNEST 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "rodriguez2006new"
+
+\end_inset
+
+ and AININHAD
+\color black
+O 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "guimaraes2006improvingAninhado"
+
+\end_inset
+
+), 
+\color inherit
+the 
+\begin_inset Formula $\mathbf{\tau}$
+\end_inset
+
+-Temperature does not use genetic algorithms to sort the data.
+ The 
+\begin_inset Formula $\mathbf{\tau}$
+\end_inset
+
+-Temperature is found by measuring the Manhattan distance 
+\begin_inset Formula $D$
+\end_inset
+
+ of the network matrix.
+ This is the sum of the row and column indexes of all of the matrix elements
+ 
+\begin_inset Formula $A_{ij}$
+\end_inset
+
+ that are filled: 
+\begin_inset Formula 
+\begin{equation}
+D=\sum_{A_{ij}>0}\left(i+j\right)
+\end{equation}
+
+\end_inset
+
+Manhattan distance is lower in more highly nested networks, since rows and
+ columns can be shuffled so that many of the elements appear in upper-left
+ positions where row and column indices are low.
+ Once 
+\begin_inset Formula $D$
+\end_inset
+
+ is found, a null model is chosen (
+\color black
+cf.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sec:Null-models"
+
+\end_inset
+
+
+\color inherit
+) and an ensemble of null matrices are created.
+ By finding the mean average Manhattan distance from the ensemble, denoted
+ 
+\begin_inset Formula $<D_{rand}>$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{\tau}$
+\end_inset
+
+-Temperature can be calculated as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\tau=\frac{D}{<D_{rand}>}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Values 
+\begin_inset Formula $\tau>1$
+\end_inset
+
+ imply that 
+\begin_inset Formula $D$
+\end_inset
+
+ is greater than 
+\begin_inset Formula $<D_{rand}>$
+\end_inset
+
+ and the network is less nested than expected for a network with the properties
+ defined in the null model.
+ 
+\begin_inset Formula $\mathbf{\tau}$
+\end_inset
+
+ is better described as a test statistic of the Manhattan distance, than
+ as a measurement of nestedness itself.
+\end_layout
+
+\begin_layout Subsubsection*
+JDM Nestedness
+\end_layout
+
+\begin_layout Standard
+The nestedness measure described in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "jonhson2013factors"
+
+\end_inset
+
+, here termed JDM after author initials, treats nestedness as a measure
+ of dissassortativity between the nodes, i.e., negative correlation between
+ row and column degrees for non-zero elements of the input matrix.
+ Their measure calculates the overlap (as the sum of the elements in the
+ squared adjacency matrix which shows the minimum number of length two paths
+ needed to connect any two nodes) of the input matrix and normalises it
+ by the expected nestedness of the configuration model ( a random graph
+ with the same empirical degree distribution as the input network) and thus
+ discounts the effect of degree heterogeneity.
+ This nestedness score is unbounded, but when close to 1 it indicates that
+ the matrix represents an uncorrelated random network.
+ Unadjusted nestedness 
+\begin_inset Formula $\tilde{\eta}$
+\end_inset
+
+ is calculated using the adjacency matrix 
+\begin_inset Formula $a$
+\end_inset
+
+ formed from the input bipartite matrix with 
+\begin_inset Formula $r$
+\end_inset
+
+ rows and 
+\begin_inset Formula $c$
+\end_inset
+
+ columns, where 
+\begin_inset Formula $D$
+\end_inset
+
+ is the node degrees in the adjacency matrix
+\color black
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\tilde{\eta}=\frac{1}{\left(r+c\right)^{2}}\sum_{i}^{\left(r+c\right)}\sum_{j}^{\left(r+c\right)}\left(\frac{a_{ij}^{2}}{D_{i}D_{j}}\right)
+\end{equation}
+
+\end_inset
+
+Nestedness of the configuration model 
+\begin_inset Formula $\eta_{conf}$
+\end_inset
+
+ can be calculated as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\eta_{conf}=\frac{r\left(\frac{\sum_{i}^{r}k_{i}^{2}}{c}\right)+c\left(\frac{\sum_{j}^{c}d_{j}^{2}}{r}\right)}{\left(\frac{\sum_{i}^{r}k_{i}}{c}\right)\left(\frac{\sum_{j}^{c}d_{j}}{r}\right)\left(r+c\right)^{2}}
+\end{equation}
+
+\end_inset
+
+which can also be written as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\eta_{conf}=\frac{r<k^{2}>_{c}+c<d^{2}>_{r}}{<k>_{c}<d>_{r}\left(r+c\right)^{2}}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $k$
+\end_inset
+
+ are the row degrees and 
+\begin_inset Formula $d$
+\end_inset
+
+ are column degrees in the bipartite matrix.
+ This leads to the normalised measure of nestedness for bipartite networks
+ defined by 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "jonhson2013factors"
+
+\end_inset
+
+ as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\eta_{bip}=\frac{\tilde{\eta}}{\eta_{conf}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Nestedness Temperature
+\end_layout
+
+\begin_layout Standard
+The original nestedness temperature calculator (NTC) 
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "atmar1993measure"
+
+\end_inset
+
+ was vaguely described and therefore difficult to re-implement, leading
+ to several subsequent variations utilising similar underlying principles
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "rodriguez2006new,guimaraes2006improvingAninhado,ulrich2007null,oksanen2013vegan2"
+
+\end_inset
+
+.
+ Here we have recoded the 
+\family typewriter
+nestedtemp
+\family default
+ function from the R package 
+\emph on
+vegan
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "oksanen2013vegan2"
+
+\end_inset
+
+.
+ The nestedness temperature for an input matrix is based on the `isocline
+ of perfect order', a curve drawn from the lower-left corner of the matrix
+ to the upper-right, with curvature defined by matrix fill.
+ Row and column orderings are then permuted using a genetic algorithm to
+ maximise the number of connections above the isocline and minimise connections
+ below the isocline.
+ The number of connections which violate these rules, termed `surprises',
+ are then counted and normalised to give a score between 0 (highly ordered)
+ and 100 (highly disordered).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot.png
+	width 7cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The NTC measure is based on an isocline of perfect order.
+ Here there are two `surprises'.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:NTC-figure-showing-isocline"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+REDO this and check for surprises!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Discrepancy
+\end_layout
+
+\begin_layout Standard
+Discrepancy 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "brualdi1999nested"
+
+\end_inset
+
+, here denoted BR, quantifies nestedness as the difference between the input
+ matrix and a perfectly nested matrix of the same dimensions and fill.
+ A duplicate matrix 
+\begin_inset Formula $P$
+\end_inset
+
+ with the same row degrees as the input matrix, but where the 1s in each
+ row are pushed as far to the left as possible (ignoring the effect this
+ has on underlying network topology).
+ The discrepancy is then found by subtracting the input matrix from this
+ perfectly nested matrix and counting the number of 1s that remain
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+What about -1s? Counting only 1s only counts the places where the input
+ doesn't have a 1 but the perfect copy does...then again, I suppose that each
+ -1 implies exactly one 1 in the result matrix...so counting -1s would effectively
+ double count.
+ So its all fine!
+\end_layout
+
+\end_inset
+
+ -- the number of differences between 
+\begin_inset Formula $P$
+\end_inset
+
+ and the input matrix.
+ A different discrepancy score can be found by treating columns instead
+ of rows, forming an alternative perfectly nested comparitor matrix 
+\begin_inset Formula $P'$
+\end_inset
+
+ by pushing the 1s in each column to the top.(instead of the row) degrees
+ of the input matrix to form 
+\begin_inset Formula $P'$
+\end_inset
+
+ a different discrepancy score can be found.
+ Here we modify the original method of 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "brualdi1999nested"
+
+\end_inset
+
+, which looks at discrepancy only in respect to 
+\begin_inset Formula $P$
+\end_inset
+
+, and instead define discrepancy as the minimum of the individual discrepancy
+ scores found from 
+\begin_inset Formula $P$
+\end_inset
+
+ and 
+\begin_inset Formula $P'$
+\end_inset
+
+, to remove any bias towards row or column nodes.
+\end_layout
+
+\begin_layout Subsection
+Quantitative
+\end_layout
+
+\begin_layout Subsubsection*
+WNODF
+\end_layout
+
+\begin_layout Standard
+The weighted NODF measure, WNODF 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "almeida2011straightforward"
+
+\end_inset
+
+, uses a similar algorithm to NODF, but is designed for use on quantitative
+ rather than binary networks.
+ In addition to asking which pairs of rows/columns are subsets of one another,
+ WNODF utilises weight information by also requiring that the preceding
+ row/column has greater values in the overlapping elements.
+ In effect, WNODF is a stricter version of NODF; the maximum WNODF score
+ that can be achieved for a quantitative matrix is equal to the NODF score
+ for the binary matrix.
+ 
+\end_layout
+
+\begin_layout Subsection
+Both
+\end_layout
+
+\begin_layout Subsubsection*
+Spectral Radius
+\end_layout
+
+\begin_layout Standard
+
+\color black
+The spectral radius (SR) is defined as the absolute value of the maximum
+ real eigenvalue from the adjacency matrix of a given input bipartite matrix.
+ SR was proposed as a nestedness measure by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "staniczenko2013ghost"
+
+\end_inset
+
+ and can be applied to both binary and quantitative matrices.
+ 
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+
+\color black
+The rest of this paragraph is discussion, really, and not needed for this
+ appendix, which is really about giving the formal definition of each measure.
+ Please check that the sentence I've added is correct!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Appendix B: Null models available in FALCON
+\end_layout
+
+\begin_layout Subsection
+Binary
+\end_layout
+
+\begin_layout Subsubsection*
+Swappable-Swappable (SS)
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Quotes eld
+\end_inset
+
+swappable rows, swappable columns
+\begin_inset Quotes erd
+\end_inset
+
+ (SS) null model conserves matrix dimensions (numbers of rows and columns)
+ and fill.
+ It is similar to `test one' in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "staniczenko2013ghost"
+
+\end_inset
+
+, which works by shuffling elements at random within the matrix; however,
+ it differs in that degenerate matrices (those containing rows/columns with
+ no connections) are not permitted.
+\end_layout
+
+\begin_layout Subsubsection*
+Fixed-Fixed (FF)
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Quotes eld
+\end_inset
+
+fixed rows, fixed columns
+\begin_inset Quotes erd
+\end_inset
+
+ (FF) null model conserves dimensions, fill and degree distribution of the
+ original matrix.
+ It is the most strict null model we consider here and is known to suffer
+ from Type II errors (i.e.
+ a failure to detect nestedness) 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "joppa2010nestedness"
+
+\end_inset
+
+.
+ Null matrix instantiations are found by searching the input matrix for
+ 2
+\begin_inset Formula $\times$
+\end_inset
+
+2 submatrices and comparing them to the 2
+\begin_inset Formula $\times$
+\end_inset
+
+2 identity matrix and its mirror image:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left(\begin{array}{cc}
+1 & 0\\
+0 & 1
+\end{array}\right)\;\qquad\quad\qquad\;\left(\begin{array}{cc}
+0 & 1\\
+1 & 0
+\end{array}\right)
+\]
+
+\end_inset
+
+If one of these configurations is found, the corresponding rows and columns
+ are swapped, changing the submatrix into the other configuration shown.
+ This has been called the Miklós-Podani trial swap algorithm 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "miklos2004randomization"
+
+\end_inset
+
+ as it counts the number of trials rather than the number of actual swaps
+ (which could lead to a biased sample if the solution is periodic).
+ We use an initial 30,000 (or row
+\begin_inset Formula $\times$
+\end_inset
+
+column if this is larger) trial swaps as a spinup for this algorithm in
+ order to `escape' the initial matrix, then take a sample null matrix every
+ additional 5,000 trial swaps 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gotelli2011over"
+
+\end_inset
+
+.
+ It should be noted that as the Manhattan distance is invariant to these
+ permutations.
+\end_layout
+
+\begin_layout Subsubsection*
+Cored-Cored (CC)
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Quotes eld
+\end_inset
+
+cored rows, cored columns
+\begin_inset Quotes erd
+\end_inset
+
+ (CC) null model conserves dimensions and fill as in the SS null model,
+ but also conserves some of the core structure found in the observed input
+ matrix.
+ Thus it is somewhere between the SS and the FF null models.
+ It is found by trial-swapping a total of row
+\begin_inset Formula $\times$
+\end_inset
+
+column elements from the input matrix and changing any 1's to 0's when this
+ does not reduce the corresponding row or column degree to zero.
+ This ensures that the size structure is conserved and preferentially preserves
+ specialist interactions within the network.
+ The removed elements are then randomly reassigned to the remaining empty
+ spaces to preserve matrix fill.
+\end_layout
+
+\begin_layout Subsubsection*
+Degreeprobable-Degreeprobable (DD)
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Quotes eld
+\end_inset
+
+degreeprobable rows, degreeprobable columns
+\begin_inset Quotes erd
+\end_inset
+
+ (DD) null model first described by 
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "bascompte2003nested"
+
+\end_inset
+
+ has subsequently been a popular choice for application to species-species
+ nested comparisons.
+ Matrix elements are probabilistically determined depending on the degree
+ distribution of the rows and columns of the initial matrix as:
+\begin_inset Formula 
+\begin{equation}
+p_{ij}=\frac{1}{2}\left(\frac{d_{j}}{r}+\frac{k_{i}}{c}\right)
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $p_{ij}$
+\end_inset
+
+ is the probability of assigning a 1 to the ith row and jth column of the
+ null matrix, 
+\begin_inset Formula $d_{j}$
+\end_inset
+
+ is the column degree of the jth column, 
+\begin_inset Formula $k_{i}$
+\end_inset
+
+ is the row degree of the ith row and 
+\begin_inset Formula $r$
+\end_inset
+
+ and 
+\begin_inset Formula $c$
+\end_inset
+
+ are the respective number of rows and columns.
+ Due to the stochastic nature of this null model its output matrices will
+ vary in size and fill.
+\end_layout
+
+\begin_layout Subsubsection*
+Equiprobable-Equiprobable (EE)
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Quotes eld
+\end_inset
+
+equiprobable rows, equiprobable columns
+\begin_inset Quotes erd
+\end_inset
+
+ (EE) null model is probabilistic and assumes that the probability of a
+ connection occurring between two nodes is related to the number of total
+ connections in the input matrix.
+ Hence for an input matrix with fill 
+\begin_inset Formula $M$
+\end_inset
+
+, 
+\begin_inset Formula $r$
+\end_inset
+
+ rows and 
+\begin_inset Formula $c$
+\end_inset
+
+ columns, the probability of a connection being present between two nodes
+ is 
+\begin_inset Formula $p_{ij}=\frac{M}{r\times c}$
+\end_inset
+
+.
+ Due to the stochastic nature of this null model its output matrices will
+ vary in size and fill.
+ It is the least strictly defined null model we consider here and is known
+ to suffer from Type I errors (a tendency to falsely detect nestedness)
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "joppa2010nestedness"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Quantitative
+\end_layout
+
+\begin_layout Subsubsection*
+Binary Shuffle
+\end_layout
+
+\begin_layout Standard
+This null model was employed by 
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "staniczenko2013ghost"
+
+\end_inset
+
+ and conserves the entire binary structure of the input matrix and the values
+ of the elements in the matrix, but shuffles the order of these values randomly
+ across the binary structure.
+\end_layout
+
+\begin_layout Subsubsection*
+Conserve Row Totals (CRT)
+\end_layout
+
+\begin_layout Standard
+This null model conserves binary structure and the row sum totals, but the
+ values of the elements on each row are changed such that each connection
+ in the row is assigned a random proportion of the row sum total.
+\end_layout
+
+\begin_layout Subsubsection*
+Conserve Column Totals (CCT)
+\end_layout
+
+\begin_layout Standard
+This null model conserves binary structure and the column sum totals, but
+ the values of the elements in each column are changed such that each connection
+ in the column is assigned a random proportion of the column sum total.
+\end_layout
+
+\begin_layout Subsubsection*
+Row Column Totals Average (RCTA)
+\end_layout
+
+\begin_layout Standard
+Both of the two above null models conserve information related to either
+ the rows or the columns, giving this property precendent over that of the
+ other entity.
+ We also introduce the Row Column Totals Average (RCTA) null model which
+ uses the average of a single null model made from each of the CCT and CRT
+ null models.
+ As information from both rows and columns is utilised in the creation of
+ this null model it may better fit with the context free ethos of nestedness
+ we persue than either of CRT or CCT alone.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "FALCON"
+options "mee"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
