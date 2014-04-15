@@ -1,13 +1,20 @@
+<<<<<<< HEAD
 % WNODF_REVERSE.m
 % Part of the FALCON (Framework of Adaptive ensembLes for the Comparison Of
 % Nestedness) package: https://github.com/sjbeckett/FALCON
 % Last updated: 21st December 2013
 
+=======
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 function [MEASURE]=WNODF_REVERSE(MATRIX)
 %WNODF_REVERSE is an abstraction of the WNODF measure described in
 %Almeida-Neto & Ulrich, 2011. But in reverse such that positive scores are
 %assigned when specialists interact more strongly than generalists. This
+<<<<<<< HEAD
 %method is described in the FALCON guides.
+=======
+%method is described in Beckett & Williams, in prep.
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 
 %M Almeida-Neto, W Ulrich. 2011.
 %A straightforward computational approach for measuring nestedness using quantitative matrices

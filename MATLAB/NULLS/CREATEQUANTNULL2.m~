@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 % CREATEQUANTNULL2.m
 % Part of the FALCON (Framework of Adaptive ensembLes for the Comparison Of
 % Nestedness) package: https://github.com/sjbeckett/FALCON
@@ -8,24 +9,32 @@ function [MEASURES]=CREATEQUANTNULL2(MATRIX,numbernulls,measures,binNull,sortVar
 %changes element values randomly. This method is described in Beckett & Williams, in prep.
 
 MEASURES = zeros(length(measures),numbernulls);
+=======
+function [TEST]=CREATEQUANTNULL2(MATRIX)%ConserveRowTotals
+%Keeps positions of filled elements the same and conserves row totals, but
+%changes element values randomly. This method is described in Beckett & Williams, in prep.
+
+
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 [r,~]=size(MATRIX);
 Qrowdegree=sum(MATRIX,2);
 
  %Create empty matrix to be filled according to null model (randomly)
     ind=MATRIX>0;
-
+<<<<<<< HEAD
     
     
     for aa = 1:numbernulls
     
-
+=======
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
     TEST=MATRIX.*0;
     TEST(ind)=1;
     
     
     for b=1:r
        
-
+<<<<<<< HEAD
         [~,indy]=find(MATRIX(b,:)); %non zero column indexes in this row.
                 
         
@@ -60,5 +69,25 @@ Qrowdegree=sum(MATRIX,2);
     
     
     end
+=======
+        [~,indy]=find(MATRIX(b,:));
+        
+        indy=shuffleVector(indy);
+        
+        
+        tot=Qrowdegree(b);
+        
+        if length(indy)>1
+            for d=1:length(indy)-1
+                use=tot*rand;
+                TEST(b,indy(d))=use;
+                tot=tot-use;        
+            end
+            
+            TEST(b,indy(length(indy)))=tot;    
+        end
+         
+    end
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 
 end

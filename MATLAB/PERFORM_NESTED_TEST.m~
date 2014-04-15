@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 % PERFORM_NESTED_TEST.m
 % Part of the FALCON (Framework of Adaptive ensembLes for the Comparison Of
 % Nestedness) package: https://github.com/sjbeckett/FALCON
@@ -7,16 +8,27 @@
 function [indicators]=PERFORM_NESTED_TEST(MAT, bintest, sortVar, functhand ,nullmodels,EnsembleNumber,plotON)
 
 more off; %Turns paging off (useful for displaying computations in Octave)
+=======
+function [indicators]=PERFORM_NESTED_TEST(MAT, bintest, functhand ,nullmodels,THRESHOLD_IN,EnsembleNumber,plotON)
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 
 indicators=[];
 %echo back user inputs
 indicators.binary=bintest;
+<<<<<<< HEAD
 indicators.sorting=sortVar;
 indicators.MEASURE=functhand;
 indicators.nulls=nullmodels;
 indicators.ensNum=EnsembleNumber;
 indicators.plot=plotON;
 disp(indicators)
+=======
+indicators.MEASURE=functhand;
+indicators.nulls=nullmodels;
+indicators.thresh=THRESHOLD_IN;
+indicators.ensNum=EnsembleNumber;
+
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 
 %Include path to where required functions are stored
 g = genpath('../MATLAB/');
@@ -33,6 +45,7 @@ addpath(g);
 %quantitative measures are not calculated. If it can be both (spectral
 %radius) then bintest should take a value of 2
 
+<<<<<<< HEAD
 %- sortVar is a value to indicate whether matrices should be sorted to maximise
 %nestedness (1) before being measured, or to be left as input/created (0). This
 %makes a difference to NODF, MANHATTAN_DISTANCE and DISCREPANCY measures only.
@@ -41,6 +54,11 @@ addpath(g);
 %should be one of the function names in the measures section e.g. to run
 %the analysis on the NODF method, functhand={'NODF'}; to run the analysis using
 % NODF and the NTC, functhand={'NODF','NTC'}
+=======
+%- functhand is a string that corresponds to the measure being analysed and
+%should be one of the function names in the measures section e.g. to run
+%the analysis on the NODF method, functhand='NODF'
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 
 %- nullmodels is a vector argument to set which null models should be
 %performed. e.g. nullmodels=[1,3] will lead to the first and third null
@@ -49,10 +67,20 @@ addpath(g);
 %binary null models are labelled with positive and increasing integers,
 %whilst quantitative null models are labelled with negative decreasing integers
 
+<<<<<<< HEAD
 %- EnsembleNumber is an argument which defines whether or not to use the
 %adaptive ensemble number framework. This is used when set as empty ([]),
 %otherwise a fixed ensemble number of null model comparisons is made. It is
 %used in function FIXEDMETHOD
+=======
+%- THRESHOLD_IN is the inputted value for threshold tolerance when
+%comparing the two ensemble groups, it is used in function ADAPTIVESOLVER
+
+%- EnsembleNumber is an argument which defines whether or not to use the
+%adaptive ensemble number framework. This is used when set as empty ([]),
+%otherwise a fixed ensemble number of null model comparisons is made. It is
+%used in function FIXEDSOLVER
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 
 %- plotON is the variable that determines whether a histogram should be
 %made displaying the measures found in the null ensemble and comparing it
@@ -63,7 +91,11 @@ addpath(g);
 
 %If you use this code to perform analysis you can cite it as:
 
+<<<<<<< HEAD
 %Beckett S.J., Boulton C.A., Williams H.T.P., 2014. FALCON: nestedness statistics for bipartite networks. figshare. (http://dx.doi.org/10.6084/m9.figshare.999117)
+=======
+%Beckett S.J., Williams H.T.P., 2013. FALCON for Nestedness Analysis.
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 
 
 %Please also cite the appropriate papers(listed below) for the
@@ -72,6 +104,7 @@ addpath(g);
 
 %Current measures and papers to cite in brackets
 
+<<<<<<< HEAD
 %NODF (Almeida-Neto et al., 2008 : Oikos, 117(8):1227-1239 (http://dx.doi.org/10.1111/j.0030-1299.2008.16644.x)  )
 %WNODF (Almeida-Neto & Ulrich, 2011 : Environmental Modelling & Software, 26(2):173-178  (http://dx.doi.org/10.1016/j.envsoft.2010.08.003))
 %MANHATTAN_DISTANCE (Corso & Britton, 2012 : Ecological Complexity 11:137-143  (http://dx.doi.org/10.1016/j.ecocom.2012.05.003))
@@ -92,6 +125,24 @@ QnullNumber=4;
 %CREATEQUANTNULL2 (Beckett, Boulton & Williams, in prep.) ()
 %CREATEQUANTNULL3 (Beckett, Boulton & Williams, in prep.) ()
 %CREATEQUANTNULL4 (Beckett, Boulton & Williams, in prep.) ()
+=======
+%NODF (Almeida-Neto et al., 2008 : Oikos, 117(8):1227-1239)
+%WNODF (Almeida-Neto & Ulrich, 2011 : Environmental Modelling & Software, 26(2):173-178)
+%WNODF_REVERSE (Beckett & Williams, in prep.)
+%TAU_TEMPERATURE (Corso & Britton, 2012 : Ecological Complexity 11:137-143)
+%SPECTRAL_RADIUS (Staniczenko et al., 2013 : Nature Communications 4:1391)
+
+%Current null models and papers to cite in brackets
+BnullNumber=3;
+%CREATEBINNULL1
+%CREATEBINNULL2 (Miklos & Podani, 2004 : Ecology, 85(1):86-92)
+%CREATEBINNULL3 (Beckett & Williams, in prep.)
+QnullNumber=3;
+%CREATEQUANTNULL1 (Staniczenko et al., 2013 : Nature Communications 4:1391)
+%CREATEQUANTNULL2 (Beckett & Williams, in prep.)
+%CREATEQUANTNULL3 (Beckett & Williams, in prep.)
+
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 
 
 %% ERROR HANDLING & SETUP
@@ -108,24 +159,35 @@ if bintest~=0 && bintest~=1 && bintest~=2
     error('Check variable bintest. Is the metric you want to evaluate a binary test? Choose 1 for binary testing, 0 for quantitative testing and 2 for both.')
 end
 
+<<<<<<< HEAD
 if sortVar~=0 && sortVar~=1
     error('Error in sortVar value. Should be 1 (sort) or 0 (no sort).')
 end
 
+=======
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 if EnsembleNumber<=0
     error('Cannot perform that number of runs in the ensemble. Set as positive integer to perform that many null model test comparisons, else leave as the empty set([]) to run using the adaptive solver')
 end
     
 
 if isempty(EnsembleNumber)
+<<<<<<< HEAD
     SOLVER=str2func('ADAPTIVEMETHOD');
     extraArg=[];
 else
     SOLVER=str2func('FIXEDMETHOD');
+=======
+    SOLVER=str2func('ADAPTIVESOLVER');
+    extraArg=THRESHOLD_IN;
+else
+    SOLVER=str2func('FIXEDSOLVER');
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
     extraArg=EnsembleNumber;
 end
 
 %% Sort Matrix
+<<<<<<< HEAD
 [~, info] = sortMATRIX(MAT,0,1);
 [QuantitativeMAT ~] = sortMATRIX(MAT,0,sortVar);
 BinaryMAT=1*(QuantitativeMAT~=0);
@@ -180,10 +242,37 @@ if bintest==1 || bintest==2
     indicators.Bin_t5=[];
     indicators.Bin_t5=SOLVER(indicators.Bin_t5,functhand,BinaryMAT,Bmeasure,'CREATEBINNULL5',1,extraArg,sortVar,plotON);
     summarytableaddition = summarytableaddition + sum(indicators.Bin_t5.SignificanceTable,1);
+=======
+[BinarySortedMAT,QSortedMAT,info]=sortMAT(MAT,bintest);
+indicators.Matrix=MAT; %input matrix
+indicators.NestedConfig=indicators.Matrix(info.index_rows,info.index_cols);%nested matrix
+indicators.index_rows=info.index_rows;%nested matrix row indices
+indicators.index_cols=info.index_cols;%nested matrix column indices
+
+%% PERFORM TESTS 
+
+MEASURE=str2func(functhand);
+
+%measure and solvers
+if bintest==1 || bintest==2
+    Bmeasure=MEASURE(BinarySortedMAT);
+    if sum(nullmodels==1)>0 || isempty(nullmodels)
+    indicators.Bin_t1=[];
+    indicators.Bin_t1=SOLVER(indicators.Bin_t1,functhand,BinarySortedMAT,Bmeasure,'CREATEBINNULL1',1,extraArg,plotON);
+    end
+    if sum(nullmodels==2)>0 || isempty(nullmodels)
+    indicators.Bin_t2=[];
+    indicators.Bin_t2=SOLVER(indicators.Bin_t2,functhand,BinarySortedMAT,Bmeasure,'CREATEBINNULL2',1,extraArg,plotON);
+    end
+    if sum(nullmodels==3)>0 || isempty(nullmodels)
+    indicators.Bin_t3=[];
+    indicators.Bin_t3=SOLVER(indicators.Bin_t3,functhand,BinarySortedMAT,Bmeasure,'CREATEBINNULL3',1,extraArg,plotON);
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
     end
 end
 
 if bintest==0 || bintest==2
+<<<<<<< HEAD
     for ww=1:length(functhand)
     Qmeasure(ww)=MEASURE{ww}(QuantitativeMAT);
     end
@@ -212,5 +301,22 @@ end
 %Significance summary table
 indicators.SignificanceTableSummary = summarytableaddition;
 
+=======
+    Qmeasure=MEASURE(QSortedMAT);
+    if sum(nullmodels==-1)>0 || isempty(nullmodels)
+    indicators.Qua_t1=[];
+    indicators.Qua_t1=SOLVER(indicators.Qua_t1,functhand,QSortedMAT,Qmeasure,'CREATEQUANTNULL1',0,extraArg,plotON);
+    end
+    if sum(nullmodels==-2)>0 || isempty(nullmodels)
+    indicators.Qua_t2=[];
+    indicators.Qua_t2=SOLVER(indicators.Qua_t2,functhand,QSortedMAT,Qmeasure,'CREATEQUANTNULL2',0,extraArg,plotON);
+    end
+    if sum(nullmodels==-3)>0 || isempty(nullmodels)
+    indicators.Qua_t3=[];
+    indicators.Qua_t3=SOLVER(indicators.Qua_t3,functhand,QSortedMAT,Qmeasure,'CREATEQUANTNULL3',0,extraArg,plotON);
+    end
+end
+
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 
 end

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 % CREATEBINNULL1.m
 % Part of the FALCON (Framework of Adaptive ensembLes for the Comparison Of
 % Nestedness) package: https://github.com/sjbeckett/FALCON
@@ -24,21 +25,40 @@ MEASURES = zeros(length(measures),numbernulls); %To store measure answers.
 for aa = 1:numbernulls
 
 TEST=0.*(MATRIX);% Matrix to fill in null model
+=======
+function [TEST]=CREATEBINNULL1(MATRIX) %EE
+%Equiprobable-Equiprobable null model
+%has same dimensions and fill as original matrix,  but filled elements are
+%randomly assigned independently of the initial ordering. The method presented
+%ensures that matrices with zero rows/columns are not created.
+
+
+
+[r,c]=size(MATRIX); %sizes of rows, columns
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 LENr=1:r; %vector of rows
 LENc=1:c;% vector of cols
 count1=r; 
 count2=c;
-
+<<<<<<< HEAD
 FILL=sum(sum(MATRIX>0));%Filled positions 
   
+=======
 
+FILL=sum(sum(MATRIX>0));%Filled positions
+TEST=0.*(MATRIX);% Matrix to fill in null model
+
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 %stage1a - fill in 1 element for each row&col such that dimensions will be
 %preserved (i.e. no chance of getting empty rows/cols and changing matrix
 %dimensions).
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 while count1>0 && count2>0
    
     randa=randi(count1);
@@ -98,7 +118,7 @@ for d=1:FILL
 end
 
 
-
+<<<<<<< HEAD
 %stage 3 - sort this created matrix
 [TEST,~]=sortMATRIX(TEST,binNull,sortVar);
 
@@ -113,4 +133,6 @@ end
 end
 
 
+=======
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 end

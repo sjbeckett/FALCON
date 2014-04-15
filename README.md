@@ -1,5 +1,6 @@
 FALCON
 ======
+
 FALCON is a package designed to enable the analysis of nestedness and help compare different nestedness measures and associated null models in bipartite networks.
 
 
@@ -31,11 +32,12 @@ If you use or develop FALCON please let us know - we are interested in knowing h
 
 Download
 --------
-
+=======
 ## Click [here](https://github.com/sjbeckett/FALCON/archive/master.zip) to download the latest version
+=======
 
 Contact
 --------
 
-This package is authored by Stephen Beckett ([@BeckettStephen](https://twitter.com/BeckettStephen)), Hywel Williams([@HywelTPWilliams](https://twitter.com/HywelTPWilliams)) and Chris Boulton([@caboulton](https://twitter.com/caboulton)) at the University of Exeter. If you have any questions please contact us!
+This package is authored by Stephen Beckett ([@BeckettStephen](https://twitter.com/BeckettStephen)) and Hywel Williams([@HywelTPWilliams](https://twitter.com/HywelTPWilliams)) at the University of Exeter. If you have any questions please contact us!
 

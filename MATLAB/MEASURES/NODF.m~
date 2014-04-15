@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 % NODF.m
 % Part of the FALCON (Framework of Adaptive ensembLes for the Comparison Of
 % Nestedness) package: https://github.com/sjbeckett/FALCON
 % Last updated: 21st December 2013
 
+=======
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 function [MEASURE]=NODF(MATRIX)
 %NODF stands for nestedness by overlap and decreasing fill and is described
 %in Almeida-Neto et al., 2008.
@@ -16,9 +19,13 @@ rows=size(MATRIX,1);
 cols=size(MATRIX,2);
 
 
-
+<<<<<<< HEAD
 colN=zeros(cols,cols);
 rowN=zeros(rows,rows);
+=======
+colN=MATRIX.*0;
+rowN=MATRIX.*0;
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 
 %Find NODF column score
 for i=1:cols-1
@@ -63,6 +70,10 @@ NODF_ROW = 2*sum(sum(rowN))/(rows*(rows-1));
 NODF=2*(sum(sum(rowN))+sum(sum(colN)))/(cols*(cols-1) +rows*(rows-1) );
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 MEASURE=NODF;
 
 end

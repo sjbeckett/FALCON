@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 % WNODF.m
 % Part of the FALCON (Framework of Adaptive ensembLes for the Comparison Of
 % Nestedness) package: https://github.com/sjbeckett/FALCON
 % Last updated: 11th April 2014
 
+=======
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 function [MEASURE]=WNODF(MATRIX)
 %WNODF is the weighted NODF measure designed for use on quantitative data
 % and is described in Almeida-Neto & Ulrich, 2011.
@@ -15,9 +18,13 @@ rows=size(MATRIX,1);
 cols=size(MATRIX,2);
 
 
-
+<<<<<<< HEAD
 colN=zeros(cols,cols);
 rowN=zeros(rows,rows);
+=======
+colN=MATRIX.*0;
+rowN=MATRIX.*0;
+>>>>>>> 5c67dfecb18bfc33586ce0fd4abe2c3980615a05
 
 %Find WNODF column score
 for i=1:cols-1

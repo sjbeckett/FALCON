@@ -8,6 +8,7 @@ function [indicators]=PERFORM_NESTED_TEST(MAT, bintest, sortVar, functhand ,null
 
 more off; %Turns paging off (useful for displaying computations in Octave)
 
+
 indicators=[];
 %echo back user inputs
 indicators.binary=bintest;
@@ -17,6 +18,7 @@ indicators.nulls=nullmodels;
 indicators.ensNum=EnsembleNumber;
 indicators.plot=plotON;
 disp(indicators)
+
 
 %Include path to where required functions are stored
 g = genpath('../MATLAB/');
@@ -63,6 +65,7 @@ addpath(g);
 
 %If you use this code to perform analysis you can cite it as:
 
+
 %Beckett S.J., Boulton C.A., Williams H.T.P., 2014. FALCON: nestedness statistics for bipartite networks. figshare. (http://dx.doi.org/10.6084/m9.figshare.999117)
 
 
@@ -92,6 +95,7 @@ QnullNumber=4;
 %CREATEQUANTNULL2 (Beckett, Boulton & Williams, in prep.) ()
 %CREATEQUANTNULL3 (Beckett, Boulton & Williams, in prep.) ()
 %CREATEQUANTNULL4 (Beckett, Boulton & Williams, in prep.) ()
+
 
 
 %% ERROR HANDLING & SETUP
@@ -211,6 +215,5 @@ end
 
 %Significance summary table
 indicators.SignificanceTableSummary = summarytableaddition;
-
 
 end
