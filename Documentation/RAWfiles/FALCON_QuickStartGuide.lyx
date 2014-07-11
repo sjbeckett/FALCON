@@ -296,7 +296,7 @@ source(`PERFORM_NESTED_TEST.R')
 \noindent
 
 \family typewriter
-PERFORM_NESTED_TEST(MATRIX, binary, MEASURE, nulls, ensNum, sortVar, plotON)
+PERFORM_NESTED_TEST(MATRIX, binary, sortVar, MEASURE, nulls, ensNum, plotON)
 \family default
 
 \begin_inset Formula $\qquad$
@@ -324,14 +324,45 @@ MATRIX
 \end_layout
 
 \begin_layout Standard
+\begin_inset VSpace smallskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \paragraph_spacing double
 \noindent
-binary -- whether the analysis you wish to perform is binary (1), quantitative
+
+\bar under
+binary 
+\bar default
+-- whether the analysis you wish to perform is binary (1), quantitative
  (0) or both (2)
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\,$
+\begin_inset VSpace smallskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\noindent
+
+\emph on
+\bar under
+sortVar
+\emph default
+\bar default
+ -- whether matrices should be preliminary ordered (1) to maximise nestedness
+ found in the input and null matrices or not (0)
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace smallskip
 \end_inset
 
 
@@ -371,7 +402,7 @@ c(`NODF',`DISCREPANCY',`SPECTRAL_RADIUS')
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\,$
+\begin_inset VSpace smallskip
 \end_inset
 
 
@@ -386,7 +417,32 @@ c(`NODF',`DISCREPANCY',`SPECTRAL_RADIUS')
 nulls
 \emph default
 \bar default
- -- the list of null models to be used.
+ -- the vector of null models to be used.
+ For example to use the SS and FF null models this would be
+\begin_inset Formula $\qquad$
+\end_inset
+
+ 
+\family typewriter
+[1 2]
+\family default
+ 
+\begin_inset Formula $\qquad$
+\end_inset
+
+in MATLAB and
+\begin_inset Formula $\qquad$
+\end_inset
+
+
+\family typewriter
+ c(1,2)
+\family default
+
+\begin_inset Formula $\qquad$
+\end_inset
+
+ in R.
  The full set can be called using the empty list; in MATLAB:
 \begin_inset Formula $\qquad$
 \end_inset
@@ -409,7 +465,7 @@ c()
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\,$
+\begin_inset VSpace smallskip
 \end_inset
 
 
@@ -431,7 +487,7 @@ ensNum
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\,$
+\begin_inset VSpace smallskip
 \end_inset
 
 
@@ -451,7 +507,7 @@ sortVar
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\,$
+\begin_inset VSpace smallskip
 \end_inset
 
 

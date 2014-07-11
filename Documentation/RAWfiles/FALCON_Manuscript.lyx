@@ -42,6 +42,11 @@
 \paperorientation portrait
 \suppress_date false
 \use_refstyle 1
+\branch g
+\selected 0
+\filename_suffix 0
+\color #faf0e6
+\end_branch
 \index Index
 \shortcut idx
 \color #008000
@@ -68,7 +73,7 @@
 \begin_body
 
 \begin_layout Title
-FALCON: Efficient statistical analysis of nestedness in bipartite networks
+FALCON: a software package for analysis of nestedness in bipartite networks
 \end_layout
 
 \begin_layout Author
@@ -91,8 +96,7 @@ College of Life and Environmental Sciences, University of Exeter, Exeter,
 \end_layout
 
 \begin_layout Abstract
-1.
- Nestedness is a statistical measure used to interpret bipartite interaction
+Nestedness is a statistical measure used to interpret bipartite interaction
  data in several ecological and evolutionary contexts, e.g.
  biogeography (species-site relationships) and species interactions (plant-polli
 nator and host-parasite networks).
@@ -102,10 +106,6 @@ nator and host-parasite networks).
  statistical significance of nestedness scores.
  The profusion of measures and null models, many of which give conflicting
  results, is problematic for comparison of nestedness across different studies.
-\end_layout
-
-\begin_layout Abstract
-2.
  We developed the FALCON software package to allow easy and efficient comparison
  of nestedness scores and statistical significances for a given input network,
  using a selection of the more popular measures and null models from the
@@ -117,10 +117,6 @@ nator and host-parasite networks).
  FALCON code is offered in three languages (R, MATLAB, Octave) and is designed
  to be modular and extensible, enabling users to easily expand its functionality
  by adding further measures and null models.
-\end_layout
-
-\begin_layout Abstract
-3.
  FALCON provides a robust methodology for comparing the strength and significanc
 e of nestedness in a given bipartite network using multiple measures and
  null models.
@@ -132,27 +128,20 @@ adaptive ensemble
 \begin_inset Quotes erd
 \end_inset
 
- method to 
+ method to
 \color black
-increase computational efficiency 
+ reduce under-sampling of the null distribution when calculating statistical
+ significance
 \color inherit
-and reduce under-sampling of the null distribution when calculating statistical
- significance.
+.
  It can work with binary or weighted input networks.
- 
-\end_layout
-
-\begin_layout Abstract
-4.
  FALCON is a response to the proliferation of different nestedness measures
  and associated null models in the literature.
  It allows easy and efficient calculation of nestedness scores and statistical
  significances using different methods, enabling comparison of results from
  different studies and thereby supporting theoretical study of the causes
  and implications of nestedness in different biological contexts.
- We hope FALCON will be a useful tool for the research community and promote
- greater synthesis and theoretical insight about nestedness in bipartite
- networks.
+ 
 \end_layout
 
 \begin_layout Abstract
@@ -183,7 +172,7 @@ Key words:
 \series bold
 Running title:
 \series default
- Analysis of nestedness in bipartite networks 
+ FALCON software for analysis of nestedness 
 \end_layout
 
 \begin_deeper
@@ -194,7 +183,7 @@ Introduction
 \end_deeper
 \begin_layout Standard
 Nestedness is a statistical property of systems where two kinds of entity
- interact.
+ interact, which can be represented as bipartite networks.
  Originally used as a metric for species-site distributions 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -219,10 +208,10 @@ key "flores2011statistical,Flores2013multiscaleGeographicPhage,beckett2013coevol
 \end_inset
 
 .
- Various discussions have considered the sources of nestedness in such systems
- and its implications for ecological dynamics
+
 \color black
- 
+ Various discussions have considered the sources of nestedness in such systems
+ and its potential implications for ecological dynamics 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "thebault2010stability,saavedra2011strong,bustos2012dynamics,james2012disentangling,staniczenko2013ghost,McQuaid201353,lever2014sudden"
@@ -233,7 +222,11 @@ key "thebault2010stability,saavedra2011strong,bustos2012dynamics,james2012disent
 \color inherit
 .
  However, it is unclear how to systematically compare results for different
- datasets.
+ ecological datasets.
+ Furthermore, nestedness is not restricted to ecological datasets, but is
+ a generic property of any bipartite network.
+ Thus there is a need for measures of nestedness that are context-independent
+ and do not depend on any particular (ecological) interpretation.
  Multiple methods for measuring nestedness have been used in different studies,
  along with multiple approaches to calculating statistical significance
  of the measured values.
@@ -271,9 +264,9 @@ Framework for Adaptive ensembLes for the Comparison Of Nestedness
  FALCON is based on the assumption that nestedness is a general statistical
  property of matrices and therefore its measurement should be independent
  of context or interpretation.
- FALCON calculates nestedness as a context-free statistical property of
- a matrix, by returning the nestedness score for the most-nested configuration
- of the input matrix.
+ FALCON calculates nestedness as a statistical property of a matrix, by
+ returning the nestedness score for the most-nested configuration of the
+ input matrix.
  Since calculating statistical significance of nestedness scores can be
  computationally demanding, involving generation of a large ensemble of
  matrices from a null distribution, FALCON uses a novel 
@@ -284,7 +277,52 @@ adaptive ensemble
 \begin_inset Quotes erd
 \end_inset
 
- method to improve efficiency.
+ method to improve efficiency by using the minimal ensemble size sufficient
+ to give robust statistics.
+\end_layout
+
+\begin_layout Standard
+Several software packages for calculating nestedness already exist, but
+ these are subject to various factors which make direct comparison of different
+ nestedness measures, and statistical interpretation of returned values
+ difficult to achieve.
+ Several nestedness measures are handled by packages which deliver a single
+ measure, making comparison difficult.
+ Some are specific to a particular operating system.
+ Some do not make source code available for reimplementation, reducing confidenc
+e in their outputs and prevent future extensions.
+ Two packages for the R statistical programming language, 
+\family typewriter
+bipartite
+\family default
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "DormannBipartitePackage"
+
+\end_inset
+
+ and 
+\family typewriter
+vegan
+\family default
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "oksanen2013vegan2"
+
+\end_inset
+
+, together contain functions for several nestedness measures and associated
+ null models, as well as many other tools for analysis of bipartite ecological
+ networks.
+ However, these packages offer no obvious implementation of significance
+ testing (the principal method for reporting results of nestedness analyses)
+ and they also lack several nestedness measures which have been recently
+ developed.
+ FALCON is designed to address these deficiencies, enabling calculation
+ of nestedness and statistical significance using a variety of measures
+ and null models, with open source code provided for several platforms.
 \end_layout
 
 \begin_layout Standard
@@ -359,8 +397,8 @@ key "FALCON"
  A guide to downloading, installing and running FALCON accompanies the code.
  This document describes the assumptions on which FALCON is based, how it
  calculates nestedness and statistical significance, and gives details of
- the adaptive ensemble method used to improve computational efficiency.
- 
+ the adaptive ensemble method used to improve computational efficiency and
+ provides a case study to demonstrate it's usage and outputs.
 \end_layout
 
 \begin_layout Section
@@ -487,8 +525,10 @@ key "saavedra2011strong,tim2012structure,bustos2012dynamics,dalsgaard2013histori
  plant-pollinator or host-parasite systems), nestedness has been interpreted
  as placing species along a gradient of generalism-specialism in the number
  of partners they interact with; in this context, perfect nestedness is
- achieved when the most specialist species of one class interacts with the
- most generalist species of the other class.
+ achieved when species within each class are ordered such that the interaction
+ set (set of partners) for each species is a strict subset of that of the
+ next species, and the most generalised species of one class interact with
+ the most specialised species of the other class.
 \end_layout
 
 \begin_layout Standard
@@ -500,11 +540,11 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\noindent
 \align center
 \begin_inset Graphics
 	filename fig1.eps
-	height 50pheight%
-	BoundingBox 198bp 66bp 396bp 776bp
+	width 40col%
 
 \end_inset
 
@@ -539,14 +579,15 @@ name "fig:Perfectlynested"
 
 \begin_layout Standard
 Nestedness is calculated from a biadjacency matrix representing pairwise
- interactions between two kinds of entity.
+ interactions between two kinds of entity (one represented by rows, the
+ other by columns).
  
 \color black
 T
 \color inherit
-he order of rows and columns for a biadjacency matrix is arbitrary; rows
- and columns can be permuted without affecting the underlying topology of
- the interaction network.
+he order of rows and columns for a biadjacency matrix is arbitrary with
+ respect to connectivity; rows and columns can be permuted without affecting
+ the underlying topology of the interaction network.
  Any non-arbitrary ordering of rows and columns in the matrix representation
  necessitates the use of additional contextual information to specify which
  order rows and columns should take.
@@ -1772,7 +1813,7 @@ key "staniczenko2013ghost"
 \begin_inset Text
 
 \begin_layout Plain Layout
-FF
+FF 
 \end_layout
 
 \end_inset
@@ -1810,7 +1851,7 @@ Shape, Fill, Degree
 \begin_layout Plain Layout
 \begin_inset CommandInset citation
 LatexCommand citealp
-key "miklos2004randomization"
+key "strona2014fast"
 
 \end_inset
 
@@ -2564,15 +2605,24 @@ status open
 \noun off
 \color none
 
-\begin_inset Formula $\qquad\quad\;\qquad\qquad\qquad\qquad\;\quad\qquad$
+\begin_inset Formula $\qquad\quad\qquad\qquad\qquad\qquad\qquad\quad\qquad$
 \end_inset
 
 (B)
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset VSpace smallskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 \noindent
 \align center
+
+\size footnotesize
 \begin_inset Formula $\left(\begin{array}{cccccccccc}
 10 & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2 & 1\\
 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2 & 1 & 0\\
@@ -2584,7 +2634,7 @@ status open
 3 & 2 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
 2 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
-\end{array}\right)\;\qquad\qquad\;\left(\begin{array}{cccccccccc}
+\end{array}\right)\qquad\left(\begin{array}{cccccccccc}
 4 & 4 & 4 & 0 & 4 & 0 & 4 & 0 & 0 & 0\\
 0 & 4 & 0 & 4 & 0 & 4 & 0 & 4 & 0 & 4\\
 4 & 0 & 4 & 4 & 4 & 0 & 4 & 0 & 4 & 0\\
@@ -2951,35 +3001,133 @@ It is a measure of the number of standard deviations the nestedness measure
  depends on whether nestedness increases with increasing measure score.
 \end_layout
 
-\begin_layout Subsection
-Performance and complexity
+\begin_layout Section
+FALCON usage - case study
 \end_layout
 
 \begin_layout Standard
-A user's choice of which null models and nestedness measures to use for
- their analysis will depend on the questions they wish to ask of their data.
- However, these choices also need to consider the computational resources
- available for the task.
- In 
+To demonstrate FALCON we analyse nestedness analysis in a bipartite network
+ representing the hashtags used by a sample of Twitter users.
+ Data were collected using the Twitter API 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "twitterAPI"
+
+\end_inset
+
+ by searching for tweets including the hashtag 
+\begin_inset Quotes eld
+\end_inset
+
+#IPCC
+\begin_inset Quotes erd
+\end_inset
+
+ in the time period 21st September 2013 - 5th October 2013.
+ A list of all hashtags used by all users found in the search dataset was
+ then used to create a binary bipartite adjacency matrix for users and hashtags.
+ This was then sampled to create a smaller matrix used for this case study
+ by including each row/column with probability of 0.1 and removing any empty
+ rows/columns.
+ The resulting matrix was stored in a comma-separated file called 'IPCC_HTuse_10
+_10_1_53x27.csv'.
+ 
+\end_layout
+
+\begin_layout Standard
+The box below shows the command sequence used to perform a binary nestedness
+ analysis using FALCON in MATLAB.
+ The first line reads in the 
+\begin_inset Quotes eld
+\end_inset
+
+.csv
+\begin_inset Quotes erd
+\end_inset
+
+ datafile, which includes row and column headers.
+ The second line extracts the adjacency matrix from the imported data.
+ The third line runs FALCON, using two binary nestedness measures (NODF
+ and SR) and three null models (CC and FF, i.e.
+ nulls 2 and 3) using the adaptive solver and displaying histogram plots.
+ The fourth line plots the input matrix in its most nested configuration,
+ as determined by FALCON.
+ The nested configuration of the matrix and output histograms from significance
+ testing are shown in 
 \begin_inset CommandInset ref
 LatexCommand formatted
-reference "fig:computationalperfromance"
+reference "fig:example"
 
 \end_inset
 
- we show the time complexity to compute some of the nestedness measures
- and null models that FALCON can perform.
- The graphs below show the average time to measure a single matrix or generate
- a single null matrix and the standard deviation from this.
- 10 trials were used starting with different 10
-\begin_inset Formula $\times$
+, whilst 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "tab:SummaryStats"
+
 \end_inset
 
-10 matrices.
- In each trial each matrix was measured 1,000 times and 1,000 null matrices
- were generated from the initial trial matrix.
- The time taken to conduct each trial was then divided by 1,000 and the
- average and standard deviation was calculated.
+ shows example output from the significance testing.
+ Further examples for use of FALCON in R are given in the accompanying supportin
+g information.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Shadowbox
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+1 >> UserHashtag = importdata('IPCC_HTuse_10_10_1_53x27.csv')
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+2 >> data = UserHashtag.data; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+3 >> output = PERFORM_NESTED_TEST(data,1,1,{'NODF','SPECTRAL_RADIUS'},[2
+ 3],[],1)
+\end_layout
+
+\begin_layout Plain Layout
+
+\family typewriter
+\size footnotesize
+4 >> MATRIXPLOT(output.NestedConfig.DegreeMatrix) 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2992,9 +3140,8 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename BENCHMARK.eps
-	lyxscale 50
-	width 7cm
+	filename tada.eps
+	width 100col%
 
 \end_inset
 
@@ -3002,24 +3149,487 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-(A) Time taken to perform each of the binary nestedness measures on the
- same 10
-\begin_inset Formula $\times$
-\end_inset
-
-10 matrix averaged over 1,000 measurements.
- SR - spectral radius, MD - Manhattan distance, NTC - nestedness temperature
- calculator, BR - discrepancy.
- (B) Time taken to generate a 10
-\begin_inset Formula $\times$
-\end_inset
-
-10 null matrix using each of the binary null models averaged over 1,000
- times.
- 
+Example output from FALCON.
+ (A) the nested arrangement of the UserHashtag data.
+ (B) Distribution of NODF scores found for an ensemble of FF null models
+ generated for the UserHashtag network (C) distribution of spectral radius
+ scores found from the same null matrix ensemble.
+ The asterix marks the nestedness score of the input network.
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:computationalperfromance"
+name "fig:example"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="9" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Null model
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CC
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nestedness measure
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NODF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SR
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NODF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SR
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Measure
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+44.4339
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.5552
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+44.4339
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.5552
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ensemble Size
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mean
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+45.3207
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7.5346
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29.9048
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.4755
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Standard Deviation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.8357
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0336
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.5600
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.2136
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+z-score
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-1.0612
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.6123
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.0812
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.0550
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+p-value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.8490
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.2480
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+<0.001
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+<0.001
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Normalised Temperature
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.9804
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.0027
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.4858
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.1667
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Example output from FALCON showing sample statistics for the UserHashtag
+ network using the operations in the box above.
+ Nestedness statistics were computed for the FF and CC null models using
+ the NODF and spectral radius measures.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:SummaryStats"
 
 \end_inset
 
@@ -3057,6 +3667,8 @@ In this paper we have presented FALCON, a software tool for reliable and
  nestedness using different nestedness measures and null models.
  We hope that this functionality will allow greater methodological uniformity
  and comparability of studies of nestedness.
+ We are in the process of performing a large comparison study of nestedness
+ metrics using FALCON (Beckett and Williams., in prep.).
  Uniformity of measurement and comparability of empirical results is an
  important preliminary step that must be achieved to enable understanding
  of the mechanistic basis and ecological (and otherwise) implications of
@@ -3690,59 +4302,22 @@ key "joppa2010nestedness"
 \end_inset
 
 .
- Null matrix instantiations are found by searching the input matrix for
- 2
-\begin_inset Formula $\times$
-\end_inset
-
-2 submatrices and comparing them to the 2
-\begin_inset Formula $\times$
-\end_inset
-
-2 identity matrix and its mirror image:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\left(\begin{array}{cc}
-1 & 0\\
-0 & 1
-\end{array}\right)\;\qquad\quad\qquad\;\left(\begin{array}{cc}
-0 & 1\\
-1 & 0
-\end{array}\right)
-\]
-
-\end_inset
-
-If one of these configurations is found, the corresponding rows and columns
- are swapped, changing the submatrix into the other configuration shown.
- This has been called the Miklós-Podani trial swap algorithm 
+ We use the curveball algorithm 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "miklos2004randomization"
+key "strona2014fast"
 
 \end_inset
 
- as it counts the number of trials rather than the number of actual swaps
- (which could lead to a biased sample if the solution is periodic).
- We use an initial 30,000 (or row
-\begin_inset Formula $\times$
-\end_inset
-
-column if this is larger) trial swaps as a spinup for this algorithm in
- order to `escape' the initial matrix, then take a sample null matrix every
- additional 5,000 trial swaps 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "gotelli2011over"
-
-\end_inset
-
-.
- It should be noted that as the Manhattan distance is invariant to these
- permutations.
+ to generate null matrices of this type.
+ It does this by iteratively choosing pairs of rows at random, compiling
+ a list of column indices which contain filled elements in one but not both
+ of the two rows.
+ This list of column indices is then randomly permuted and reassigned to
+ the two rows corresponding to the number of unique positions belonging
+ to each of the original rows.
+ It should be noted that the Manhattan distance is invariant to these permutatio
+ns.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -3761,13 +4336,17 @@ cored rows, cored columns
  (CC) null model conserves dimensions and fill as in the SS null model,
  but also conserves some of the core structure found in the observed input
  matrix.
- Thus it is somewhere between the SS and the FF null models.
- It is found by trial-swapping a total of row
-\begin_inset Formula $\times$
+ It is found by performing a total of 
+\begin_inset Formula $M\times N$
 \end_inset
 
-column elements from the input matrix and changing any 1's to 0's when this
- does not reduce the corresponding row or column degree to zero.
+ trial-swaps on the 
+\begin_inset Formula $M\times N$
+\end_inset
+
+ input matrix, where two matrix elements are randomly chosen and their values
+ can be swapped only when this does not reduce the corresponding row or
+ column degrees to zero.
  This ensures that the size structure is conserved and preferentially preserves
  specialist interactions within the network.
  The removed elements are then randomly reassigned to the remaining empty

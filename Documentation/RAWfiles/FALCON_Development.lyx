@@ -242,6 +242,22 @@ key "beckett2013coevolutionary"
 \end_layout
 
 \begin_layout Itemize
+After we uploaded the first iteration of FALCON 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "strona2014fast"
+
+\end_inset
+
+ published the so-called curveball algorithm for generating null matrices
+ under the FF null model.
+ This algorithm resolves the difficulties with the algorithms detailed above
+ and is both quicker and more robust than the previous implementations.
+ In light of this we replaced the trial-swap method with that of the curveball
+ algorithm.
+\end_layout
+
+\begin_layout Itemize
 Although the NTC
 \begin_inset CommandInset citation
 LatexCommand citep
