@@ -1,7 +1,7 @@
 % PERFORM_NESTED_TEST.m
 % Part of the FALCON (Framework of Adaptive ensembLes for the Comparison Of
 % Nestedness) package: https://github.com/sjbeckett/FALCON
-% Last updated: 15th April 2014
+% Last updated: 11th July 2014
 
 
 function [indicators]=PERFORM_NESTED_TEST(MAT, bintest, sortVar, functhand ,nullmodels,EnsembleNumber,plotON)
@@ -81,11 +81,12 @@ addpath(g);
 %SPECTRAL_RADIUS (Staniczenko et al., 2013 : Nature Communications 4:1391 (http://dx.doi.org/10.1038/ncomms2422))
 %NTC (Oksanen et al., 2013 : vegan: community ecology package. R package version 2.0-9. http://CRAN.R-project.org/package=vegan))
 %DISCREPANCY (Brualdi & Sanderson, 1999 : Oecologia 119(2): 256-264 (http://dx.doi.org/10.1007/s004420050784))
+%JDM nestedness (Johnson et al., 2013 : PLOS ONE (http://dx.doi.org/10.1371/journal.pone.0074025))
 
 %Current null models and papers to cite in brackets
 BnullNumber=5;
 %CREATEBINNULL1 (Gotelli, 2000 : Ecology 81: 2606-2621)
-%CREATEBINNULL2 (Miklos & Podani, 2004 : Ecology, 85(1):86-92  (http://dx.doi.org/10.1890/03-0101);
+%CREATEBINNULL2 (Strona et al., 2014 : Nature Communications, 5:4114  (http://dx.doi.org/10.1038/ncomms5114));
 %Gotelli & Ulrich, 2011 : Ecological Modelling 222:1337–1339 (http://dx.doi.org/10.1016/j.ecolmodel.2010.11.008))
 %CREATEBINNULL3 (Beckett, Boulton & Williams, in prep.) ()
 %CREATEBINNULL4 (Bascompte et al., 2003 : PNAS 100(16):9383-9387  (http://dx.doi.org/10.1073/pnas.1633576100)

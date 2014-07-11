@@ -1,7 +1,7 @@
 # PERFORM_NESTED_TEST.R
 # Part of the FALCON (Framework of Adaptive ensembLes for the Comparison Of
 # Nestedness) package: https://github.com/sjbeckett/FALCON
-# Last updated: 15th April 2014
+# Last updated: 11th July 2014
 
 
 PERFORM_NESTED_TEST <- function(MAT, bintest=1, sortVar=1, functhand ,nullmodels=c(),EnsembleNumber=c(),plotON=1) {
@@ -102,11 +102,12 @@ if("NTC" %in% functhand == TRUE) {
 #SPECTRAL_RADIUS (Staniczenko et al., 2013 : Nature Communications 4:1391 (http://dx.doi.org/10.1038/ncomms2422))
 #NTC (Oksanen et al., 2013 : vegan: community ecology package. R package version 2.0-9. http://CRAN.R-project.org/package=vegan))
 #DISCREPANCY (Brualdi & Sanderson, 1999 : Oecologia 119(2): 256-264 (http://dx.doi.org/10.1007/s004420050784))
+#JDM nestedness (Johnson et al., 2013 : PLOS ONE (http://dx.doi.org/10.1371/journal.pone.0074025))
 
 #Current null models and papers to cite in brackets
 BnullNumber=5;
 #CREATEBINNULL1 (Gotelli, 2000 : Ecology 81: 2606-2621)
-#CREATEBINNULL2 (Miklos & Podani, 2004 : Ecology, 85(1):86-92  (http://dx.doi.org/10.1890/03-0101);
+#CREATEBINNULL2 (Strona et al., 2014 : Nature Communications, 5:4114  (http://dx.doi.org/10.1038/ncomms5114));
 #Gotelli & Ulrich, 2011 : Ecological Modelling 222:1337–1339 (http://dx.doi.org/10.1016/j.ecolmodel.2010.11.008))
 #CREATEBINNULL3 (Beckett, Boulton & Williams, in prep.) ()
 #CREATEBINNULL4 (Bascompte et al., 2003 : PNAS 100(16):9383-9387  (http://dx.doi.org/10.1073/pnas.1633576100)
@@ -126,7 +127,7 @@ if (plotON!=0 && plotON!=1)
 
 
 if (sum(nullmodels>BnullNumber)>0 || sum(nullmodels< -QnullNumber)>0 || sum(nullmodels==0)>0)
-    stop('Have you set the argument nullmodels correctly? Should be the empty set([]) or vector containing the null model number(s) you wish to compute. If you have extended the code are the variables BnullNumber and QnullNumber set correctly?')
+    stop('Have you set the argument nullmodels correctly? Should be the empty set( c() ) or vector containing the null model number(s) you wish to compute. If you have extended the code are the variables BnullNumber and QnullNumber set correctly?')
 
 
 if (bintest!=0 && bintest!=1 && bintest!=2)
@@ -138,7 +139,7 @@ if (sortVar!=0 && sortVar!=1)
 
 
 if ((length(EnsembleNumber)==1 && EnsembleNumber <= 0) || (length(EnsembleNumber) > 1))
-    stop('Cannot perform that number of runs in the ensemble. Set as positive integer to perform that many null model test comparisons, else leave as the empty set([]) to run using the adaptive solver')
+    stop('Cannot perform that number of runs in the ensemble. Set as positive integer to perform that many null model test comparisons, else leave as the empty set( c() ) to run using the adaptive solver')
 
 
 if (length(EnsembleNumber)==0) {
