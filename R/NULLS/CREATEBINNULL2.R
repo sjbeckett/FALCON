@@ -27,7 +27,7 @@ CREATEBINNULL2 <- function(MATRIX,numbernulls,measures,binNull,sortVar) { #FF
         
         TEST <- MATRIX; #start with the input matrix
 
-        for(rep in 1:5*r) {
+        for(rep in 1:(5*r)) {
     
             AB <- sample(1:r,2) #choose two rows
             A <- TEST[AB[1],] #vector of elements in row 1
