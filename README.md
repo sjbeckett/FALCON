@@ -6,7 +6,7 @@ FALCON is a package designed to enable the analysis of nestedness and help compa
 
 ![FALCONs falcon](https://raw.github.com/sjbeckett/FALCON/master/Documentation/RAWfiles/falcon.png)
 
-It is currently implemented for use in [MATLAB](http://www.mathworks.co.uk/products/matlab/), [Octave](https://www.gnu.org/software/octave/) and [R](http://www.r-project.org/).
+It is currently implemented for use in [MATLAB](http://www.mathworks.co.uk/products/matlab/), [Octave](https://www.gnu.org/software/octave/) and [R](http://www.r-project.org/). A Python wrapper for the MATLAB version of FALCON, with thanks to Orazio Angelini, [is also available](https://github.com/ganileni/py_falcon).
 
 ## Features
 
